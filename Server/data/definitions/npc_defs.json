@@ -61,7 +61,7 @@
 	{
 		"npcId": 3310,
         "name": "Financial Advisor",
-		"examine": "Handles the books for MistPS. He also manages player donations."
+		"examine": "Handles the books for Astral. He also manages player donations."
     }, 
 	{
 		"npcId": 7456,

@@ -148,7 +148,7 @@ public class CommandPacketListener implements PacketListener {
 			}
 			player.getInventory().add(565, 1000).add(555, 1000).add(560, 1000);
 		} else if(parts[0].startsWith("donate") || parts[0].startsWith("store")) {
-			player.getPacketSender().sendURL("https://www.mistps.com/store");
+			player.getPacketSender().sendURL("");
 		} else if(parts[0].startsWith("claim")) {
 			player.getPacketSender().sendMessage("To claim purchased items, please talk to the Financial Advisor at home.");
 		} else if(parts[0].startsWith("players")) {

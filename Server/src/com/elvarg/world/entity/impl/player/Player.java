@@ -359,8 +359,7 @@ public class Player extends Character {
 		//Packets
 		getPacketSender().sendMapRegion().sendDetails(); //Map region, player index and player rights
 		getPacketSender().sendTabs(); //Client sideicons
-		getPacketSender().sendMessage("Welcome to MistPS! We hope you enjoy your stay.");
-		getPacketSender().sendMessage("Check out the new inferno deal in the website shop!");
+		getPacketSender().sendMessage("Welcome to Astral.");
 
 		//Send levels and total exp
 		long totalExp = 0;

@@ -121,7 +121,7 @@ public class Elvarg {
 			logger.info("The loader has finished loading utility tasks.");
 			logger.info("Elvarg is now online on port "+NetworkConstants.GAME_PORT+"!");
 		} catch (Exception ex) {
-			logger.log(java.util.logging.Level.SEVERE, "Could not start Elvarg! Program terminated.", ex);
+			logger.log(java.util.logging.Level.SEVERE, "Could not start Astral! Program terminated.", ex);
 			System.exit(1);
 		}
 	}

@@ -75,7 +75,7 @@ public class Bank extends ItemContainer {
 			getPlayer().getPacketSender().sendString(5383, "Results for "+getPlayer().getSearchSyntax()+"..")
 			.sendConfig(117, 117);
 		} else {
-			getPlayer().getPacketSender().sendString(5383, "Bank of MistPS")
+			getPlayer().getPacketSender().sendString(5383, "Bank of Astral")
 			.sendConfig(117, 0);
 		}
 
