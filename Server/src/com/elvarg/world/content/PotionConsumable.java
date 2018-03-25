@@ -116,6 +116,16 @@ public enum PotionConsumable {
 			PotionConsumable.onRestoreEffect(player);
 		}
 	},
+	
+	SANFEW_SERUM_POTIONS(10925, 10927, 10929, 10931) {
+		@Override
+		 public void onEffect(Player player) {
+            PotionConsumable.onPrayerEffect(player, true);
+            PotionConsumable.onRestoreEffect(player);
+            PotionConsumable.onAntipoisonEffect(player, 60 * 2);
+		}
+	},
+	
 	PRAYER_POTIONS(2434, 139, 141, 143) {
 		@Override
 		public void onEffect(Player player) {
@@ -188,6 +198,7 @@ public enum PotionConsumable {
 		if(player.getPotionTimer().elapsed(1200)) {
 			player.getPacketSender().sendInterfaceRemoval();
 			player.getCombat().reset();
+			player.getPacketSender().sendMessage("You Drink the " + potion.get().name().replace("_", " ").toLowerCase());
 			player.performAnimation(new Animation(829));
 			player.getPotionTimer().reset();
 			player.getInventory().setItem(slot, getReplacementItem(item)).refreshItems();
@@ -341,6 +352,7 @@ public enum PotionConsumable {
 			}
 		}
 	}
+	
 
 	/**
 	 * The method that executes the basic effect potion action that will
@@ -381,7 +393,7 @@ public enum PotionConsumable {
 	 */
 	private static void onAntipoisonEffect(Player player, int seconds) {
 		player.getCombat().getPoisonImmunityTimer().start(seconds);
-		player.getPacketSender().sendMessage("You are now immune to poison for another "+seconds+" seconds.");
+		//player.getPacketSender().sendMessage("You are now immune to poison for another "+seconds+" seconds.");
 	}
 
 	/**

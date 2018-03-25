@@ -153,6 +153,7 @@ public class Food {
 		MANTA_RAY(new Item(391), 22),
 		KARAMBWAN(new Item(3144), 18),
 		ANGLERFISH(new Item(13441), 22),
+		DARK_CRAB(new Item(11936), 22),
 
 		/*
 		 * Baked goods food types a player
