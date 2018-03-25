@@ -3,34 +3,34 @@
   "password": "skrrtskrrt123",
   "staff-rights": "DEVELOPER",
   "position": {
-    "x": 3094,
-    "y": 3511,
+    "x": 3096,
+    "y": 3494,
     "z": 0
   },
   "spell-book": "ANCIENT",
-  "fight-type": "STAFF_POUND",
+  "fight-type": "UNARMED_KICK",
   "auto-retaliate": false,
   "xp-locked": false,
-  "clanchat": "Mist",
+  "clanchat": "help",
   "target-teleport": false,
-  "preserve": true,
-  "rigour": true,
-  "augury": true,
+  "preserve": false,
+  "rigour": false,
+  "augury": false,
   "has-veng": false,
-  "last-veng": -951,
+  "last-veng": -390,
   "running": true,
   "openPresetsOnDeath": true,
   "run-energy": 100,
   "spec-percentage": 100,
   "recoil-damage": 0,
   "poison-damage": 0,
-  "poison-immunity": -874,
-  "fire-immunity": -874,
-  "teleblock-timer": -874,
-  "prayerblock-timer": -874,
-  "target-search-timer": -494,
-  "special-attack-restore-timer": -2527,
-  "skull-timer": -4421,
+  "poison-immunity": -390,
+  "fire-immunity": -390,
+  "teleblock-timer": -390,
+  "prayerblock-timer": -390,
+  "target-search-timer": -390,
+  "special-attack-restore-timer": -390,
+  "skull-timer": -664,
   "skull-type": "WHITE_SKULL",
   "total-kills": 0,
   "target-kills": 0,
@@ -44,8 +44,8 @@
   "blowpipe-scales": 0,
   "inventory": [
     {
-      "id": 12791,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 0
     },
     {
@@ -186,33 +186,33 @@
   ],
   "equipment": [
     {
-      "id": 12931,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 0
     },
     {
-      "id": 2412,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 1
     },
     {
-      "id": 12002,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 2
     },
     {
-      "id": 12904,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 3
     },
     {
-      "id": 21021,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 4
     },
     {
-      "id": 12825,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 5
     },
     {
@@ -221,8 +221,8 @@
       "slot": 0
     },
     {
-      "id": 21024,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 7
     },
     {
@@ -231,13 +231,13 @@
       "slot": 0
     },
     {
-      "id": 7462,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 9
     },
     {
-      "id": 13235,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 10
     },
     {
@@ -246,8 +246,8 @@
       "slot": 0
     },
     {
-      "id": 11773,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 12
     },
     {
@@ -258,94 +258,94 @@
   ],
   "appearance": [
     0,
-    1,
-    19,
-    27,
-    33,
-    37,
+    3,
+    18,
+    26,
+    34,
+    38,
     42,
     14,
-    1,
-    1,
     2,
-    3,
-    6
+    14,
+    5,
+    4,
+    0
   ],
   "skills": {
     "level": [
+      1,
+      1,
       99,
-      99,
-      99,
-      83,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99
+      80,
+      60,
+      31,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "maxLevel": [
+      1,
+      1,
       99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99
+      80,
+      60,
+      31,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     "experience": [
-      13038739,
-      13046557,
-      13038355,
-      13054005,
+      0,
+      0,
       13034431,
-      13034431,
-      13044550,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431,
-      13034431
+      1986068,
+      273742,
+      14833,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
     ]
   },
   "quick-prayers": [
@@ -431,7 +431,7 @@
     },
     {
       "id": 8013,
-      "amount": 14,
+      "amount": 15,
       "slot": 7
     },
     {
@@ -480,304 +480,9 @@
       "slot": 16
     },
     {
-      "id": 21012,
-      "amount": 2,
-      "slot": 17
-    },
-    {
-      "id": 13652,
-      "amount": 1,
-      "slot": 18
-    },
-    {
-      "id": 6570,
-      "amount": 1,
-      "slot": 19
-    },
-    {
-      "id": 21006,
-      "amount": 1,
-      "slot": 20
-    },
-    {
-      "id": 12954,
-      "amount": 1,
-      "slot": 21
-    },
-    {
-      "id": 21003,
-      "amount": 1,
-      "slot": 22
-    },
-    {
-      "id": 13263,
-      "amount": 1,
-      "slot": 23
-    },
-    {
-      "id": 11791,
-      "amount": 1,
-      "slot": 24
-    },
-    {
-      "id": 12899,
-      "amount": 1,
-      "slot": 25
-    },
-    {
-      "id": 11905,
-      "amount": 1,
-      "slot": 26
-    },
-    {
-      "id": 12931,
-      "amount": 1,
-      "slot": 27
-    },
-    {
-      "id": 11785,
-      "amount": 1,
-      "slot": 28
-    },
-    {
-      "id": 12881,
-      "amount": 1,
-      "slot": 29
-    },
-    {
-      "id": 12883,
-      "amount": 1,
-      "slot": 30
-    },
-    {
-      "id": 21295,
-      "amount": 1,
-      "slot": 31
-    },
-    {
-      "id": 11770,
-      "amount": 1,
-      "slot": 32
-    },
-    {
-      "id": 11771,
-      "amount": 1,
-      "slot": 33
-    },
-    {
-      "id": 2542,
-      "amount": 4,
-      "slot": 34
-    },
-    {
-      "id": 2544,
-      "amount": 4,
-      "slot": 35
-    },
-    {
-      "id": 2543,
-      "amount": 4,
-      "slot": 36
-    },
-    {
-      "id": 1038,
-      "amount": 1,
-      "slot": 37
-    },
-    {
-      "id": 1048,
-      "amount": 1,
-      "slot": 38
-    },
-    {
-      "id": 1046,
-      "amount": 1,
-      "slot": 39
-    },
-    {
-      "id": 1044,
-      "amount": 1,
-      "slot": 40
-    },
-    {
-      "id": 1040,
-      "amount": 1,
-      "slot": 41
-    },
-    {
-      "id": 1042,
-      "amount": 1,
-      "slot": 42
-    },
-    {
-      "id": 1057,
-      "amount": 1,
-      "slot": 43
-    },
-    {
-      "id": 1053,
-      "amount": 1,
-      "slot": 44
-    },
-    {
-      "id": 1055,
-      "amount": 5,
-      "slot": 45
-    },
-    {
-      "id": 11847,
-      "amount": 1,
-      "slot": 46
-    },
-    {
-      "id": 1050,
-      "amount": 1,
-      "slot": 47
-    },
-    {
-      "id": 12817,
-      "amount": 1,
-      "slot": 48
-    },
-    {
-      "id": 12821,
-      "amount": 1,
-      "slot": 49
-    },
-    {
-      "id": 13576,
-      "amount": 1,
-      "slot": 50
-    },
-    {
-      "id": 19481,
-      "amount": 5,
-      "slot": 51
-    },
-    {
-      "id": 10925,
-      "amount": 9999999,
-      "slot": 52
-    },
-    {
-      "id": 11396,
-      "amount": 1,
-      "slot": 53
-    },
-    {
-      "id": 6685,
-      "amount": 10000000,
-      "slot": 54
-    },
-    {
       "id": 11936,
-      "amount": 999997,
-      "slot": 55
-    },
-    {
-      "id": 12695,
-      "amount": 9999998,
-      "slot": 56
-    },
-    {
-      "id": 11832,
-      "amount": 1,
-      "slot": 57
-    },
-    {
-      "id": 12006,
-      "amount": 1,
-      "slot": 58
-    },
-    {
-      "id": 19553,
-      "amount": 1,
-      "slot": 59
-    },
-    {
-      "id": 21285,
-      "amount": 1,
-      "slot": 60
-    },
-    {
-      "id": 11834,
-      "amount": 1,
-      "slot": 61
-    },
-    {
-      "id": 19722,
-      "amount": 1,
-      "slot": 62
-    },
-    {
-      "id": 13239,
-      "amount": 1,
-      "slot": 63
-    },
-    {
-      "id": 11802,
-      "amount": 1,
-      "slot": 64
-    },
-    {
-      "id": 11828,
-      "amount": 1,
-      "slot": 65
-    },
-    {
-      "id": 13271,
-      "amount": 1,
-      "slot": 66
-    },
-    {
-      "id": 229,
-      "amount": 1,
-      "slot": 67
-    },
-    {
-      "id": 13307,
-      "amount": 972170000,
-      "slot": 68
-    },
-    {
-      "id": 21018,
-      "amount": 1,
-      "slot": 69
-    },
-    {
-      "id": 10927,
-      "amount": 1,
-      "slot": 70
-    },
-    {
-      "id": 565,
-      "amount": 868,
-      "slot": 71
-    },
-    {
-      "id": 560,
-      "amount": 736,
-      "slot": 72
-    },
-    {
-      "id": 555,
-      "amount": 604,
-      "slot": 73
-    },
-    {
-      "id": 562,
-      "amount": 1,
-      "slot": 74
-    },
-    {
-      "id": 563,
-      "amount": 1,
-      "slot": 75
-    },
-    {
-      "id": 12697,
-      "amount": 1,
-      "slot": 76
+      "amount": 999999,
+      "slot": 17
     }
   ],
   "bank-1": [],

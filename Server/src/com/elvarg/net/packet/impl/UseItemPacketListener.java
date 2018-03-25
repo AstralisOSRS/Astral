@@ -84,7 +84,6 @@ public class UseItemPacketListener implements PacketListener {
 		final int itemSlot = packet.readLEShort();
 		final int objectX = packet.readLEShortA();
 		final int itemId = packet.readShort();
-
 		if (itemSlot < 0 || itemSlot > player.getInventory().capacity())
 			return;
 		final Item item = player.getInventory().getItems()[itemSlot];
@@ -95,23 +94,23 @@ public class UseItemPacketListener implements PacketListener {
 		if(!RegionClipping.objectExists(gameObject)) {
 			//	player.getPacketSender().sendMessage("An error occured. Error code: "+id).sendMessage("Please report the error to a staff member.");
 			return;
-					
-			 if (item.getDefinition().isNoted() && gameObject.getDefinition().getName().toLowerCase().contains("bank")) {
-		          int id = item.getDefinition().getNoteId();
-		          int amount = item.getAmount();
-		          if (player.getInventory().getFreeSlots() == 0) {
-		              player.getPacketSender().sendMessage("You don't have enough space in your inventory.");
-		              return;
-		              }
-		              else if  (amount > player.getInventory().getFreeSlots()) {
-		              amount = player.getInventory().getFreeSlots();
-		          player.getInventory().getById(item.getId()).decrementAmountBy(amount);
-		          player.getInventory().add(id,amount);
-		          player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
-		              }
-			 }
-		
+		}
+		 if (item.getDefinition().isNoted() && gameObject.getDefinition().getName().toLowerCase().contains("bank")) {
+	          int id = item.getDefinition().getNoteId();
+	          int amount = item.getAmount();
+	          if (player.getInventory().isFull()) {
+	              player.getPacketSender().sendMessage("You don't have enough space in your inventory.");
+	              return;
+	          }
+	          if (amount > player.getInventory().getFreeSlots()) {
+	              amount = player.getInventory().getFreeSlots();
+	              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
+	              player.getInventory().add(id,amount);
+	              player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
+	          }
+		 }
 
+	}
 
 	@SuppressWarnings("unused")
 	private static void itemOnPlayer(Player player, Packet packet) {
