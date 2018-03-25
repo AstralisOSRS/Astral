@@ -381,6 +381,7 @@ public class Player extends Character {
 
 		//Refresh item containers..
 		getInventory().refreshItems();
+		getPouch().refreshItems();
 		getEquipment().refreshItems();
 
 		//Interaction options on right click...
@@ -499,6 +500,7 @@ public class Player extends Character {
 		PrayerHandler.deactivatePrayers(this);
 		getEquipment().refreshItems();
 		getInventory().refreshItems();
+		getPouch().refreshItems();
 		for (Skill skill : Skill.values())
 			getSkillManager().setCurrentLevel(skill, getSkillManager().getMaxLevel(skill));
 		setRunEnergy(100);

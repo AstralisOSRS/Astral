@@ -4,7 +4,7 @@
   "staff-rights": "DEVELOPER",
   "position": {
     "x": 3094,
-    "y": 3509,
+    "y": 3511,
     "z": 0
   },
   "spell-book": "ANCIENT",
@@ -16,21 +16,21 @@
   "preserve": true,
   "rigour": true,
   "augury": true,
-  "has-veng": true,
-  "last-veng": 19,
+  "has-veng": false,
+  "last-veng": -951,
   "running": true,
   "openPresetsOnDeath": true,
   "run-energy": 100,
   "spec-percentage": 100,
   "recoil-damage": 0,
   "poison-damage": 0,
-  "poison-immunity": -281,
-  "fire-immunity": -281,
-  "teleblock-timer": -281,
-  "prayerblock-timer": -281,
-  "target-search-timer": -6,
-  "special-attack-restore-timer": -1557,
-  "skull-timer": -2804,
+  "poison-immunity": -874,
+  "fire-immunity": -874,
+  "teleblock-timer": -874,
+  "prayerblock-timer": -874,
+  "target-search-timer": -494,
+  "special-attack-restore-timer": -2527,
+  "skull-timer": -4421,
   "skull-type": "WHITE_SKULL",
   "total-kills": 0,
   "target-kills": 0,
@@ -258,25 +258,25 @@
   ],
   "appearance": [
     0,
-    3,
-    18,
-    26,
-    34,
-    38,
+    1,
+    19,
+    27,
+    33,
+    37,
     42,
     14,
+    1,
+    1,
     2,
-    14,
-    5,
-    4,
-    0
+    3,
+    6
   ],
   "skills": {
     "level": [
       99,
       99,
       99,
-      76,
+      83,
       99,
       99,
       99,
@@ -326,10 +326,10 @@
       13038739,
       13046557,
       13038355,
-      13053591,
+      13054005,
       13034431,
       13034431,
-      13044143,
+      13044550,
       13034431,
       13034431,
       13034431,
@@ -737,47 +737,47 @@
     {
       "id": 13307,
       "amount": 972170000,
-      "slot": 69
+      "slot": 68
     },
     {
       "id": 21018,
       "amount": 1,
-      "slot": 70
+      "slot": 69
     },
     {
       "id": 10927,
       "amount": 1,
-      "slot": 71
+      "slot": 70
     },
     {
       "id": 565,
       "amount": 868,
-      "slot": 72
+      "slot": 71
     },
     {
       "id": 560,
       "amount": 736,
-      "slot": 73
+      "slot": 72
     },
     {
       "id": 555,
       "amount": 604,
-      "slot": 74
+      "slot": 73
     },
     {
       "id": 562,
       "amount": 1,
-      "slot": 75
+      "slot": 74
     },
     {
       "id": 563,
       "amount": 1,
-      "slot": 76
+      "slot": 75
     },
     {
       "id": 12697,
       "amount": 1,
-      "slot": 77
+      "slot": 76
     }
   ],
   "bank-1": [],
