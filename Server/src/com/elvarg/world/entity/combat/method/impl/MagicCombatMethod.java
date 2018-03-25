@@ -26,7 +26,7 @@ public class MagicCombatMethod implements CombatMethod {
 
 	@Override
 	public PendingHit[] getHits(Character character, Character target) {
-		return new PendingHit[]{new PendingHit(character, target, this, true, 3)};
+		return new PendingHit[]{new PendingHit(character, target, this, true, 2)};
 	}
 
 	@Override
