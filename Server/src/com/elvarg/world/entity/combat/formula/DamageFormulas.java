@@ -132,6 +132,14 @@ public class DamageFormulas {
 				maxHit = c.getAsNpc().getDefinition().getMaxHit();
 			}
 		}
+		
+	       if(c.isPlayer()) {
+	            switch (c.getAsPlayer().getEquipment().getItems()[Equipment.AMULET_SLOT].getId()) {
+	            case 12002:
+	                maxHit *= 1.1;
+	                break;
+	            }
+	       }
 
 		if(c.isPlayer()) {
 			switch (c.getAsPlayer().getEquipment().getItems()[Equipment.WEAPON_SLOT].getId()) {
