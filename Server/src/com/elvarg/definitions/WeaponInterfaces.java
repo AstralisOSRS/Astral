@@ -277,29 +277,30 @@ public final class WeaponInterfaces {
 		CombatSpecial.assign(player);
 		CombatSpecial.updateBar(player);
 		
-		//Search for an attack style matching ours
-	/*	for (FightType type : weapon.getFightType()) {
-			if (type.getStyle() == player.getCombat().getFightType().getStyle()) {
-				player.getCombat().setFightType(type);
-				player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
-				return;
-			}
-		}*/
+		  //Search for an attack style matching ours
+	        for (FightType type : weapon.getFightType()) {
+	            if (type.getStyle() == player.getCombat().getFightType().getStyle()) {
+	                player.getCombat().setFightType(type);
+	                player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
+	                return;
+	            }
+	        }
 
-		//Set default attack style to aggressive!
-		for(FightType type : weapon.getFightType()) {
-			if(type.getStyle() == FightStyle.AGGRESSIVE) {
-				player.getCombat().setFightType(type);
-				player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
-				return;
-			}
-		}
-		
-		//Still no proper attack style.
-		//Set it to the first one..
-		player.getCombat().setFightType(player.getCombat().getWeapon().getFightType()[0]);
-		player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
-	}
+	        //Set default attack style to aggressive!
+	        for(FightType type : weapon.getFightType()) {
+	            if(type.getStyle() == FightStyle.AGGRESSIVE) {
+	            	 player.getCombat().setFightType(type);
+	                player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
+	                return;
+	            }
+	            if(type.getStyle() == FightStyle.CONTROLLED) {
+	            	  player.getCombat().setFightType(type);
+	            	player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
+	            }
+	        }
+	        
+	        player.getPacketSender().sendConfig(player.getCombat().getFightType().getParentId(), player.getCombat().getFightType().getChildId());
+	    }
 
 	public static boolean changeCombatSettings(Player player, int button) {
 		switch(button) {
