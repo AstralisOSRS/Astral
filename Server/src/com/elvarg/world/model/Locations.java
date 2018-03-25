@@ -9,6 +9,11 @@ import com.elvarg.world.entity.impl.npc.NPC;
 import com.elvarg.world.entity.impl.player.Player;
 import com.elvarg.world.model.dialogue.DialogueManager;
 
+/**
+ * Fixed issues with duel arena and attack option appear out of combat areas, etc..
+ * @author Dennis
+ *
+ */
 public class Locations {
 
 	public static void login(Player player) {
@@ -22,10 +27,12 @@ public class Locations {
 		player.getLocation().leave(player);
 	}
 
-	public static int PLAYERS_IN_WILD;
-
 	public enum Location {
-		WILDERNESS(new int[]{2940, 3392, 2986, 3012, 3653, 3720, 3650, 3653, 3150, 3199, 2994, 3041}, new int[]{3525, 3968, 10338, 10366, 3441, 3538, 3457, 3472, 3796, 3869, 3733, 3790}, false, true, true, true, true, true) {
+		WILDERNESS(new int[]{2940, 3392, 2986, 3012, 3650, 3653, 3012, 3059, 3008, 3070, 2250, 2295, 2760,
+                2805, 2830, 2885, 2505, 2550},
+        new int[]{3525, 3968, 10338, 10366, 3457, 3472, 10303, 10351, 10235, 10300, 4675, 4729,
+                10120, 10180, 10105, 10150, 4760, 4795},false, true,
+				true, true, true, true) {
 			@Override
 			public void process(Player player) {
 				int y = player.getPosition().getY();
@@ -74,26 +81,23 @@ public class Locations {
 				return true;
 			}
 		},
-		DEFAULT(null, null, false, true, true, true, true, true) {
+		DUEL_ARENA(new int[]{3322, 3394, 3311, 3323, 3331, 3391}, new int[]{3195, 3291, 3223, 3248, 3242, 3260}, false, true, true, true, true, true) {
 			@Override
 			public void process(Player p) {
 				p.getDueling().process();
 			}
 			@Override
 			public boolean canAttack(Player attacker, Player target) {
-				if(!attacker.getDueling().inDuel()) {
-					return false;
-				}
-				if(attacker.getDueling().getState() == DuelState.STARTING_DUEL
+				if(attacker.getDueling().getState() == DuelState.IN_DUEL) {
+					if(target.getDueling().getState() == DuelState.IN_DUEL) {
+						return true;
+					}
+				} else if(attacker.getDueling().getState() == DuelState.STARTING_DUEL
 						|| target.getDueling().getState() == DuelState.STARTING_DUEL) {
 					DialogueManager.sendStatement(attacker, "The duel hasn't started yet!");
 					return false;
 				}
-				if(!attacker.getDueling().isInteract(target)) {
-					attacker.getPacketSender().sendMessage("That's not your opponent!");
-					return false;
-				}
-				return true;
+				return false;
 			}
 			@Override
 			public boolean canTeleport(Player player) {
@@ -103,9 +107,15 @@ public class Locations {
 				}
 				return true;
 			}
-		};
-
-		Location(int[] x, int[] y, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
+		},
+		DEFAULT(null, null, false, true, true, true, true, true) {
+			@Override
+			public void process(Player p) {
+				// removes the attack option when leaving a combat area
+				p.getPacketSender().sendInteractionOption("null", 2, true);
+			}
+        };
+		private Location(int[] x, int[] y, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
 			this.x = x;
 			this.y = y;
 			this.multi = multi;
@@ -132,14 +142,50 @@ public class Locations {
 			return y;
 		}
 
-		public static boolean inMulti(Character gc) {
-			if(gc.getLocation() == WILDERNESS) {
-				int x = gc.getPosition().getX(), y = gc.getPosition().getY();
-				if(x >= 3155 && y >= 3798 || x >= 3020 && x <= 3055 && y >= 3684 && y <= 3711 || x >= 3150 && x <= 3195 && y >= 2958 && y <= 3003 || x >= 3645 && x <= 3715 && y >= 3454 && y <= 3550 || x>= 3150 && x <= 3199 && y >= 3796 && y <= 3869 || x >= 2994 && x <= 3041 && y >= 3733 && y <= 3790)
-					return true;
-			}
-			return gc.getLocation().multi;
-		}
+        public static boolean inMulti(Character character) {
+            int tileX = character.getPosition().getX(), tileY = character.getPosition().getY();
+            boolean agilityWild = tileX >= 2989 && tileX <= 3009 && tileY >= 3916 && tileY <= 3966;
+            if (character.getLocation() == WILDERNESS) {
+                if (tileX >= 3250 && tileX <= 3302 && tileY >= 3905 && tileY <= 3925 || tileX >= 3020 
+                		&& tileX <= 3055 && tileY >= 3684 && tileY <= 3711
+                        || tileX >= 3150 && tileX <= 3195 && tileY >= 2958 && tileY <= 3003
+                        || tileX >= 3645 && tileX <= 3715 && tileY >= 3454 && tileY <= 3550
+                        || tileX > 3193 && tileX < 3279 && tileY > 9272 && tileY < 9343
+                        || tileX >= 3136 && tileX <= 3327 && tileY >= 3519 && tileY <= 3607
+                        || tileX >= 3125 && tileX <= 3327 && tileY >= 3648 && tileY <= 3860
+                        || tileX >= 3200 && tileX <= 3390 && tileY >= 3840 && tileY <= 3967
+                        || tileX >= 2992 && tileX <= 3007 && tileY >= 3912 && tileY <= 3967 && !agilityWild
+                        || tileX >= 2946 && tileX <= 2959 && tileY >= 3816 && tileY <= 3831
+                        || tileX >= 3008 && tileX <= 3199 && tileY >= 3856 && tileY <= 3903
+                        || tileX >= 3008 && tileX <= 3071 && tileY >= 3600 && tileY <= 3711
+                        || tileX >= 3072 && tileX <= 3327 && tileY >= 3608 && tileY <= 3647
+                        || tileX >= 2624 && tileX <= 2690 && tileY >= 2550 && tileY <= 2619
+                        || tileX >= 2371 && tileX <= 2422 && tileY >= 5062 && tileY <= 5117
+                        || tileX >= 2896 && tileX <= 2927 && tileY >= 3595 && tileY <= 3630
+                        || tileX >= 2892 && tileX <= 2932 && tileY >= 4435 && tileY <= 4464
+                        || tileX >= 2256 && tileX <= 2287 && tileY >= 4680 && tileY <= 4711
+                        || tileX >= 2250 && tileX <= 2295 && tileY >= 4675 && tileY <= 4729 // in
+                        // kbd
+                        || tileX >= 2516 && tileX <= 2595 && tileY >= 4926 && tileY <= 5003 // gwd
+                        || tileX >= 3008 && tileX <= 3070 && tileY >= 10235 && tileY <= 10300 // kbd
+                        // poison
+                        // spiders
+                        || tileX >= 2560 && tileX <= 2630 && tileY >= 5710 && tileY <= 5753
+                        || tileX >= 2505 && tileX <= 2550 && tileY >= 4760 && tileY <= 4795)
+                    return true;
+            } else {
+                if (character.getLocation() != WILDERNESS) {
+                    // rock crabs
+                    if (tileX >= 2656 && tileX <= 2732 && tileY >= 3711 && tileY <= 3742
+                            || tileX >= 2885 && tileX <= 2920 && tileY >= 4375 && tileY <= 4415
+                            //tds
+                            || tileX >= 2570 && tileX <= 2620 && tileY >= 5701 && tileY <= 5750) {
+                        return true;
+                    }
+                }
+            }
+            return character.getLocation().multi;
+        }
 
 		public boolean isSummoningAllowed() {
 			return summonAllowed;
@@ -161,79 +207,46 @@ public class Locations {
 			return aidingAllowed;
 		}
 
-		public static Location getLocation(Entity gc) {
-			for(Location location : Location.values()) {
-				if(location != Location.DEFAULT)
-					if(inLocation(gc, location))
-						return location;
-			}
-			return Location.DEFAULT;
-		}
+        public static Location getLocation(Entity gc) {
+            for (Location location : Location.values()) {
+                if (location != Location.DEFAULT)
+                    if (inLocation(gc, location))
+                        return location;
+            }
+            return Location.DEFAULT;
+        }
 
-		public static boolean inLocation(Entity gc, Location location) {
-			if(location == Location.DEFAULT) {
-				if(getLocation(gc) == Location.DEFAULT)
-					return true;
-				else
-					return false;
-			}
-			/*if(gc instanceof Player) {
-				Player p = (Player)gc;
-				if(location == Location.TRAWLER_GAME) {
-					String state = FishingTrawler.getState(p);
-					return (state != null && state.equals("PLAYING"));
-				} else if(location == FIGHT_PITS_WAIT_ROOM || location == FIGHT_PITS) {
-					String state = FightPit.getState(p), needed = (location == FIGHT_PITS_WAIT_ROOM) ? "WAITING" : "PLAYING";
-					return (state != null && state.equals(needed));
-				} else if(location == Location.SOULWARS) {
-					return (SoulWars.redTeam.contains(p) || SoulWars.blueTeam.contains(p) && SoulWars.gameRunning);
-				} else if(location == Location.SOULWARS_WAIT) {
-					return SoulWars.isWithin(SoulWars.BLUE_LOBBY, p) || SoulWars.isWithin(SoulWars.RED_LOBBY, p);
-				}
-			}
-			 */
-			return inLocation(gc.getPosition().getX(), gc.getPosition().getY(), location);
-		}
+        public static boolean inLocation(Entity entity, Location location) {
+        	return location == Location.DEFAULT ? getLocation(entity) == Location.DEFAULT ? true : false : inLocation(entity.getPosition().getX(), entity.getPosition().getY(), location); 
+        }
 
-		public static boolean inLocation(int absX, int absY, Location location) {
-			int checks = location.getX().length - 1;
-			for(int i = 0; i <= checks; i+=2) {
-				if(absX >= location.getX()[i] && absX <= location.getX()[i + 1]) {
-					if(absY >= location.getY()[i] && absY <= location.getY()[i + 1]) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
+        public static boolean inLocation(int x, int y, Location location) {
+            int checks = location.getX().length - 1;
+            for (int i = 0; i <= checks; i += 2) {
+                if (x >= location.getX()[i] && x <= location.getX()[i + 1]) {
+                    if (y >= location.getY()[i] && y <= location.getY()[i + 1]) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
-		public void process(Player player) {
-
-		}
+		public void process(Player player) { }
 
 		public boolean canTeleport(Player player) {
 			return true;
 		}
 
-		public void login(Player player) {
+		public void login(Player player) { }
 
-		}
+		public void enter(Player player) { }
 
-		public void enter(Player player) {
+		public void leave(Player player) { }
 
-		}
+		public void logout(Player player) { }
 
-		public void leave(Player player) {
-
-		}
-
-		public void logout(Player player) {
-
-		}
-
-		public void onDeath(Player player) {
-
-		}
+		public void onDeath(Player player) { }
 
 		public boolean handleKilledNPC(Player killer, NPC npc) {
 			return false;
@@ -244,36 +257,38 @@ public class Locations {
 		}
 	}
 
-	public static void onTick(Character gc) {
-		Location newLocation = Location.getLocation(gc);
-		if(gc.getLocation() == newLocation) {
-			if(gc.isPlayer()) {
-				Player player = (Player) gc;
-				gc.getLocation().process(player);
-				if(Location.inMulti(player)) {
-					if(player.getMultiIcon() != 1)
-						player.getPacketSender().sendMultiIcon(1);
-				} else if(player.getMultiIcon() == 1)
-					player.getPacketSender().sendMultiIcon(0);
-			}
-		} else {
-			Location prev = gc.getLocation();
-			if(gc.isPlayer()) {
-				Player player = (Player) gc;
-				if(player.getMultiIcon() > 0)
-					player.getPacketSender().sendMultiIcon(0);
-				if(player.getWalkableInterfaceId() > 0)
-					player.getPacketSender().sendWalkableInterface(-1);
-				if(player.getPlayerInteractingOption() != PlayerInteractingOption.NONE) {
-					player.getPacketSender().sendInteractionOption("null", 2, true);
-				}
-			}
-			gc.setLocation(newLocation);
-			if(gc.isPlayer()) {
-				prev.leave(((Player)gc));
-				gc.getLocation().enter(((Player)gc));
-			}
-		}
+	public static void onTick(Character character) {
+        Location newLocation = Location.getLocation(character);
+        if (character.getLocation() == newLocation) {
+            if (character.isPlayer()) {
+                Player player = (Player) character;
+                character.getLocation().process(player);
+                if (Location.inMulti(player)) {
+                    if (player.getMultiIcon() != 1) {
+                        player.getPacketSender().sendMultiIcon(1);
+                    }
+                } else if (player.getMultiIcon() == 1) {
+                    player.getPacketSender().sendMultiIcon(0);
+                }
+            }
+        } else {
+            Location previousLocation = character.getLocation();
+            if (character.isPlayer()) {
+                Player player = (Player) character;
+                if (player.getMultiIcon() > 0)
+                    player.getPacketSender().sendMultiIcon(0);
+                if (player.getWalkableInterfaceId() > 0 && player.getWalkableInterfaceId() != 37400
+                        && player.getWalkableInterfaceId() != 50000)
+                    player.getPacketSender().sendWalkableInterface(-1);
+                if (player.getPlayerInteractingOption() != PlayerInteractingOption.NONE)
+                    player.getPacketSender().sendInteractionOption("null", 2, true);
+                	player.getPacketSender().sendInteractionOption("null", 1, true);
+            }
+            character.setLocation(newLocation);
+            if (character.isPlayer()) {
+                previousLocation.leave(((Player) character));
+                character.getLocation().enter(((Player) character));
+            }
+        }
 	}
-
 }
