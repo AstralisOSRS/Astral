@@ -60,7 +60,7 @@ public class GameConstants {
 	 * on switching items or should it be delayed
 	 * until next game cycle?
 	 */
-	public static final boolean QUEUE_SWITCHING_REFRESH = false;
+	public static final boolean QUEUE_SWITCHING_REFRESH = true;
 
 	/**
 	 * Multiplies the experience gained.
@@ -74,7 +74,7 @@ public class GameConstants {
 	 */
 	public static final int TAB_INTERFACES[][] =
 		{
-				{0, 2423}, {1, 24000}, {2, 31000}, {3, 3213}, {4, 1644}, {5, 5608}, {6, -1}, //Row 1
+				{0, 2423}, {1, 3917}, {2, 31000}, {3, 3213}, {4, 1644}, {5, 5608}, {6, -1}, //Row 1
 
 				{7, 37128}, {8, 5065}, {9, 5715}, {10, 2449}, {11, 42500}, {12, 147}, {13, 32000} //ROw 2
 		};
