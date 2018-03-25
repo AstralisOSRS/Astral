@@ -186,6 +186,7 @@ public class Client extends GameApplet {
 	public static final int TEXTURES_CRC = 6;
 	public static final int CHAT_CRC = 7;
 	public static final int SOUNDS_CRC = 8;
+	public static int dragset = 10;
 	
 	private FileServer fileServer;
 	
@@ -4594,7 +4595,7 @@ public class Client extends GameApplet {
 				if (activeInterfaceType == 3)
 					updateChatbox = true;
 				activeInterfaceType = 0;
-				if (aBoolean1242 && anInt989 >= 15) {
+				if (aBoolean1242 && anInt989 >= dragset) {
 					bankItemDragSprite = null;
 					lastActiveInvInterface = -1;
 					processRightClick();
@@ -6912,7 +6913,25 @@ public class Client extends GameApplet {
 				}
 				
 				if ((key == 13 || key == 10) && inputString.length() > 0) {
-
+					String[] args = inputString.split(" ");
+					
+					if (inputString.equals("::mydrag")) // added
+                        sendMessage("your drag is : "+dragset , 0, "");
+                    if (args[0].equals("::drag")) {
+                        try {
+                        int number =  Integer.parseInt(args[1]);
+                        if (number > 20) {
+                            sendMessage("You can only set drag 1 - 20 and 6 is OSRS Default drag.", 0, "");
+                            return;
+                        }
+                            dragset = number;
+                    }catch(Exception e) {
+                        e.printStackTrace();
+                        sendMessage("You can only set drag 1 - 20 and 6 is OSRS Default drag.", 0, "");
+                        }
+                    }
+                    
+                    
 					if (inputString.startsWith("/")) {
 						inputString = "::" + inputString;
 					}
@@ -10183,7 +10202,7 @@ public class Client extends GameApplet {
 											if (differenceY < 5
 													&& differenceY > -5)
 												differenceY = 0;
-											if (anInt989 < 10) {
+											if (anInt989 < dragset) {
 												differenceX = 0;
 												differenceY = 0;
 											}
