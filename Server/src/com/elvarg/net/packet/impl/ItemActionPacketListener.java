@@ -81,17 +81,7 @@ public class ItemActionPacketListener implements PacketListener {
 			}
 			break;
 		case 12791:
-			if (player.getLocation() != Location.WILDERNESS && player.getPouch().isEmpty()) {
-				player.getPacketSender().sendInterfaceRemoval();
-				MagicSpellbook.changeSpellbook(player, MagicSpellbook.ANCIENT);
-				player.getPouch().add(565, 100000).add(555, 100000).add(560, 100000);
-				player.getPacketSender().sendMessage("You Fill your pouch with Barrage Runes.");
-			} else if (player.getPouch().contains(565) && player.getPouch().contains(555) && player.getPouch().contains(560)) {
-				player.getPacketSender().sendMessage("@red@ You already have Barrage runes inside your runepouch.");
-			} else if (player.getPouch().isFull() && player.getLocation() != Location.WILDERNESS) {
-				player.getPacketSender().sendMessage("You empty your runepouch.");
-				player.getPouch().resetItems();
-			}
+			player.getPouch().addBarrageRunes();
 			break;
 			
 		case 8013:
@@ -226,17 +216,7 @@ public class ItemActionPacketListener implements PacketListener {
 			break;
 			
 		case 12791:
-			if (player.getLocation() != Location.WILDERNESS && player.getPouch().isEmpty()) {
-				player.getPacketSender().sendInterfaceRemoval();
-				MagicSpellbook.changeSpellbook(player, MagicSpellbook.LUNAR);
-				player.getPouch().add(9075, 100000).add(557, 100000).add(560, 100000);
-				player.getPacketSender().sendMessage("You Fill your pouch with Vengeance Runes.");
-			} else if (player.getPouch().contains(9075) && player.getPouch().contains(557) && player.getPouch().contains(560)) {
-				player.getPacketSender().sendMessage("@red@ You already have Vengeance runes inside your runepouch.");
-			} else if (player.getPouch().isFull() && player.getLocation() != Location.WILDERNESS) {
-				player.getPacketSender().sendMessage("You empty your runepouch.");
-				player.getPouch().resetItems();
-			}
+			player.getPouch().addVengeanceRunes();
 			break;
 			
 		}
@@ -262,17 +242,7 @@ public class ItemActionPacketListener implements PacketListener {
 			break;
 			
 		case 12791:
-			if (player.getLocation() != Location.WILDERNESS && player.getPouch().isEmpty()) {
-				player.getPacketSender().sendInterfaceRemoval();
-				MagicSpellbook.changeSpellbook(player, MagicSpellbook.NORMAL);
-				player.getPouch().add(563, 100000).add(562, 100000).add(560, 100000);
-				player.getPacketSender().sendMessage("You Fill your pouch with Teleblock Runes.");
-			} else if (player.getPouch().contains(563) && player.getPouch().contains(562) && player.getPouch().contains(560)) {
-				player.getPacketSender().sendMessage("@red@ You already have Teleblock runes inside your runepouch.");
-			} else if (player.getPouch().isFull() && player.getLocation() != Location.WILDERNESS) {
-				player.getPacketSender().sendMessage("You empty your runepouch.");
-				player.getPouch().resetItems();
-			}
+			player.getPouch().addTeleBlockRunes();
 			break;
 		}
 	}
