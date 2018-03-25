@@ -140,6 +140,12 @@ public final class ObjectDefinition {
 			objectDef.name = "Information";
 			objectDef.interactions = null;
 		}
+		
+		if(id == 823) {
+			objectDef.interactions = new String[5];
+			objectDef.interactions[0] = "@gre@Attack";
+			objectDef.name = "@red@Maxhit Dummy";
+		}
 
 		if(id == 29150) {
 			objectDef.interactions = new String[5];

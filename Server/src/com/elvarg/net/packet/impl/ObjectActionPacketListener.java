@@ -11,7 +11,10 @@ import com.elvarg.net.packet.PacketConstants;
 import com.elvarg.net.packet.PacketListener;
 import com.elvarg.world.collision.region.RegionClipping;
 import com.elvarg.world.content.Obelisks;
+import com.elvarg.world.entity.combat.CombatFactory;
 import com.elvarg.world.entity.combat.CombatSpecial;
+import com.elvarg.world.entity.combat.CombatType;
+import com.elvarg.world.entity.combat.formula.DamageFormulas;
 import com.elvarg.world.entity.impl.player.Player;
 import com.elvarg.world.model.ForceMovement;
 import com.elvarg.world.model.Graphic;
@@ -77,6 +80,22 @@ public class ObjectActionPacketListener implements PacketListener {
 				case BANK_CHEST:
 					player.getBank(player.getCurrentBankTab()).open();
 					break;
+					
+				  case MAXHIT_DUMMY:
+	                    CombatFactory.getMethod(player).startAnimation(player);
+	                    CombatFactory.getMethod(player).getHits(player, player);
+	                    if (CombatFactory.getMethod(player).getCombatType().equals(CombatType.MELEE)) {
+	                    player.forceChat("My Melee max hit is: " + DamageFormulas.calculateMaxMeleeHit(player));
+	                    player.getPacketSender().sendMessage("You Go for your  melee maxhit.");
+	                    CombatFactory.getMethod(player).finished(player);
+	                }  else if(CombatFactory.getMethod(player).getCombatType().equals(CombatType.RANGED)) {
+	                    player.forceChat("My Range max hit is: " + DamageFormulas.calculateMaxRangedHit(player));
+	                    player.getPacketSender().sendMessage("You Go for your Range maxhit.");
+	                } else if(CombatFactory.getMethod(player).getCombatType().equals(CombatType.MAGIC)) {
+	                    player.forceChat("My Magic max hit is: " + DamageFormulas.getMagicMaxhit(player));
+	                    player.getPacketSender().sendMessage("You Go for your Magic maxhit.");
+	                }
+	                    break;
 					
 				case WILDY_PORTAL:
 					player.getPacketSender().sendMessage("You are teleported to level 25 wilderness.");
@@ -311,4 +330,5 @@ public class ObjectActionPacketListener implements PacketListener {
 	private static final int EDGEVILLE_BANK = 6943;
 	private static final int BANK_CHEST = 2693;
 	private static final int WILDERNESS_DITCH = 23271;
+	private static final int MAXHIT_DUMMY = 823;
 }
