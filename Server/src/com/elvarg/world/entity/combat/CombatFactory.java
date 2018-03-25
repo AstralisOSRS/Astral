@@ -316,7 +316,7 @@ public class CombatFactory {
 			if(attacker.getMovementQueue().isMoving()) {
 				if(method.getCombatType() == CombatType.MELEE) {
 					int deltaDistance = attacker.getPosition().getDistance(target.getPosition());
-					if(deltaDistance <= 3) {
+					if(deltaDistance <= 1) {
 						runningTowards = true;
 					}
 				}
