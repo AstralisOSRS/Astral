@@ -1,7 +1,5 @@
 package com.elvarg.world.model.container.impl;
 
-import java.util.Optional;
-
 import com.elvarg.world.entity.impl.player.Player;
 import com.elvarg.world.model.Item;
 import com.elvarg.world.model.MagicSpellbook;

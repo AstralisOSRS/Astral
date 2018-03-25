@@ -1174,6 +1174,21 @@ public final class Widget {
 		minigames(t);
 		wilderness(t);
 	}
+	
+	 public static void Runepouch(GameFont[] t) {
+	        Widget tab = addInterface(32900);
+	        addSpriteLoader(32901, 487); // RunePouch top part
+	        addHoverButton_sprite_loader(32902, 107, 21, 21, "Close", -1, 32903, 1);
+	        addHoveredButton_sprite_loader(32903, 108, 21, 21, 32904);
+	    
+	        tab.totalChildren(3);
+	        
+	        
+	        tab.child(0, 32901, 100, 88); // RunePouch Top part
+	        tab.child(1, 32902, 422, 94);
+	        tab.child(2, 32903, 422, 94);
+	        
+	    }
 
 	public static void monsters(GameFont[] t) {
 		Widget tab = addInterface(38200);
