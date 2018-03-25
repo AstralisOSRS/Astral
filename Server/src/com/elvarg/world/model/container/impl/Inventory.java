@@ -28,6 +28,24 @@ public class Inventory extends ItemContainer {
 		return 28;
 	}
 
+	public void unNoteItem(Item item) {
+        int unNotedId = item.getDefinition().getNoteId();
+        int originalAmount = item.getAmount();
+        if(!getPlayer().getInventory().isFull()) {
+            int amountToUnnote = 0;
+            if(originalAmount > getPlayer().getInventory().getFreeSlots())
+                amountToUnnote = getPlayer().getInventory().getFreeSlots();
+            else
+                amountToUnnote = originalAmount;
+            
+            if(amountToUnnote > 0)
+                getPlayer().getInventory().delete(item.getId(), amountToUnnote, true);
+                getPlayer().getInventory().add(unNotedId, amountToUnnote);
+            	  getPlayer().getPacketSender().sendMessage("You withdraw " + (amountToUnnote) + " " + item.getDefinition().getName() + (amountToUnnote > 0 ? "s" : "") + ".");
+        } else
+            getPlayer().getPacketSender().sendMessage("You don't have enough space in your inventory.");
+    }
+	
 	@Override
 	public StackType stackType() {
 		return StackType.DEFAULT;

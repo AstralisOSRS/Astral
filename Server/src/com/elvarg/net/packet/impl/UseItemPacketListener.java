@@ -95,27 +95,10 @@ public class UseItemPacketListener implements PacketListener {
 			//	player.getPacketSender().sendMessage("An error occured. Error code: "+id).sendMessage("Please report the error to a staff member.");
 			return;
 		}
-		 if (item.getDefinition().isNoted() && gameObject.getDefinition().getName().toLowerCase().contains("bank")) {
-	          int id = item.getDefinition().getNoteId();
-	          int amount = item.getAmount();
-	          if (player.getInventory().isFull()) {
-	              player.getPacketSender().sendMessage("You don't have enough space in your inventory.");
-	              return;
-	          }
-	          if (amount >= 1) {
-	              amount = item.getAmount();
-	              if (amount >= 1 && amount <= 28) {
-		              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
-	            	  player.getInventory().add(id,amount);
-	            	  player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
-	              } else if (amount >= 1 && amount > 28) {
-	            	  amount = player.getInventory().getFreeSlots();
-		              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
-	            	  player.getInventory().add(id,amount);
-	            	  player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
-	              }
-	          }
-		 }
+		if (item.getDefinition().isNoted() && gameObject.getDefinition().getName().toLowerCase().contains("bank")) {
+            player.getInventory().unNoteItem(item);
+            return;
+       }
 	}
 
 	@SuppressWarnings("unused")
