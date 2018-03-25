@@ -30,7 +30,8 @@ public class ExamineItemPacketListener implements PacketListener {
 		
 		ItemDefinition itemDef = ItemDefinition.forId(item);
 		if(itemDef != null) {
-			player.getPacketSender().sendMessage(itemDef.getExamine());
+			int itemValue = itemDef.getValue();	
+			player.getPacketSender().sendMessage(itemDef.getExamine() + " - @blu@Common trade value: @bla@" + Misc.format(itemValue));
 		}
 	}
 

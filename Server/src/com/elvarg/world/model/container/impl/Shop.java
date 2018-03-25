@@ -43,6 +43,13 @@ public class Shop extends ItemContainer {
 	public ShopDefinition getDefinition() {
 		return definition;
 	}
+	
+	public static String checkItemValue(int item)
+	{
+		ItemDefinition defined = ItemDefinition.forId(item);
+		int itemValue = defined.getValue();
+		return Misc.format(itemValue);
+	}
 
 	//Is the shop currently restocking items?
 	public boolean restockingItems() {
