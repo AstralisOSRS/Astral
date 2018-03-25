@@ -102,14 +102,20 @@ public class UseItemPacketListener implements PacketListener {
 	              player.getPacketSender().sendMessage("You don't have enough space in your inventory.");
 	              return;
 	          }
-	          if (amount > player.getInventory().getFreeSlots()) {
-	              amount = player.getInventory().getFreeSlots();
-	              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
-	              player.getInventory().add(id,amount);
-	              player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
+	          if (amount >= 1) {
+	              amount = item.getAmount();
+	              if (amount >= 1 && amount <= 28) {
+		              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
+	            	  player.getInventory().add(id,amount);
+	            	  player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
+	              } else if (amount >= 1 && amount > 28) {
+	            	  amount = player.getInventory().getFreeSlots();
+		              player.getInventory().getById(item.getId()).decrementAmountBy(amount);
+	            	  player.getInventory().add(id,amount);
+	            	  player.getPacketSender().sendMessage("You withdraw " + (amount) + " " + item.getDefinition().getName() + (amount > 1 ? "s" : "") + ".");
+	              }
 	          }
 		 }
-
 	}
 
 	@SuppressWarnings("unused")
