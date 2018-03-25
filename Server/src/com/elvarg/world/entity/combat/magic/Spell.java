@@ -53,21 +53,31 @@ public abstract class Spell {
 		// Then we check the items required.
 		if (itemsRequired(player).isPresent()) {
 
-			// Suppress the runes based on the staff, we then use the new array
-			// of items that don't include suppressed runes.
-			Item[] items = PlayerMagicStaff.suppressRunes(player,
-					itemsRequired(player).get());
+			 Item[] items = PlayerMagicStaff.suppressRunes(player,
+	                    itemsRequired(player).get());
+	            
 
-			// Now check if we have all of the runes.
-			if (!player.getInventory().containsAll(items)) {
+	            for (Item item : items) {
+	                if (item == null) {
+	                    continue;
+	                }
 
-				// We don't, so we can't cast.
-				player.getPacketSender().sendMessage(
-						"You do not have the required items to cast this spell.");
-				player.getCombat().setCastSpell(null);
-				player.getCombat().reset();
-				return false;
-			}
+	                boolean inPouch = false;
+
+	                if (player.getInventory().contains(12791)) {
+	                    if (player.getPouch().contains(item)) {
+	                        inPouch = true;
+	                    }
+	                }
+
+	                if (!player.getInventory().contains(item) && !inPouch) {
+	                    // We don't, so we can't cast.
+	                    player.getPacketSender().sendMessage("You do not have the required items to cast this spell.");
+	                    player.getCombat().setCastSpell(null);
+	                    player.getCombat().reset();
+	                    return false;
+	                }
+	            }
 
 
 			// Finally, we check the equipment required.

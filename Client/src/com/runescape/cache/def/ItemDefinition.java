@@ -232,6 +232,13 @@ public final class ItemDefinition {
 			itemDef.actions[0] = "Open";
 			break;
 			
+		case 12791:
+			itemDef.actions = new String[5];
+			itemDef.actions[0] = "@gre@Barrage";
+			itemDef.actions[2] = "@gre@Teleblock";
+			itemDef.actions[3] = "@gre@Vengeance";
+			break;
+			
 		case 8013:
 			itemDef.name = "Home teleport";
 			break;

@@ -62,6 +62,7 @@ import com.elvarg.world.model.container.impl.Bank;
 import com.elvarg.world.model.container.impl.Equipment;
 import com.elvarg.world.model.container.impl.Inventory;
 import com.elvarg.world.model.container.impl.PriceChecker;
+import com.elvarg.world.model.container.impl.Runepouch;
 import com.elvarg.world.model.container.impl.Shop;
 import com.elvarg.world.model.dialogue.Dialogue;
 import com.elvarg.world.model.dialogue.DialogueOptions;
@@ -549,6 +550,7 @@ public class Player extends Character {
 	private boolean regionChange, allowRegionChangePacket;
 	private boolean experienceLocked;
 	private final Inventory inventory = new Inventory(this);
+	private final Runepouch runepouch = new Runepouch(this);
 	private final Equipment equipment = new Equipment(this);
 	private final PriceChecker priceChecker = new PriceChecker(this);
 	private ForceMovement forceMovement;
@@ -810,6 +812,10 @@ public class Player extends Character {
 
 	public Inventory getInventory() {
 		return inventory;
+	}
+	
+	public Runepouch getPouch() {
+		return runepouch;
 	}
 
 	public Equipment getEquipment() {
