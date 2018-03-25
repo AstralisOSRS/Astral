@@ -1,5 +1,7 @@
 package com.elvarg.net.packet.impl;
 
+import java.util.stream.Stream;
+
 import com.elvarg.Elvarg;
 import com.elvarg.definitions.ItemDefinition;
 import com.elvarg.definitions.NpcDropDefinition;
@@ -371,6 +373,22 @@ public class CommandPacketListener implements PacketListener {
 				player.getPacketSender().sendRights();
 			}
 		}
+		if (parts[0].equals("finditem")) {
+            String name = command.substring(9).toLowerCase().replaceAll("_", " ");
+            System.out.print("Debug name: " + name);
+            String itemName = "";
+            player.getPacketSender().sendMessage("Searching for possible item id's for item - " + name);
+            for (int i = 0; i < ItemDefinition.DEFINITIONS.length; i++) {
+            if (ItemDefinition.forId(i).getName().toLowerCase().contains(name)) {
+                itemName = ItemDefinition.forId(i).getName().toLowerCase();
+                System.out.print("found " + itemName);
+                player.getPacketSender().sendMessage("Found item with name [" + Misc.capitalize(ItemDefinition.forId(i).getName().toLowerCase()) + "] - id:<col=ff0000> " + i);
+            }
+        }
+        if (itemName == "") {
+            player.getPacketSender().sendConsoleMessage("No such item with name [" + name + "] has been found!");
+        }
+    }
 		if(parts[0].startsWith("copybank")) {
 			String player2 = command.substring(parts[0].length() + 1);
 			Player plr = World.getPlayerByName(player2);
