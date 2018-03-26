@@ -12061,8 +12061,8 @@ public class Client extends GameApplet {
 
                               // Rune pouch lighting up spells
                               if (other.inventoryItemId[slot] == 12792) {
+                            	  
                                   Widget pouch = Widget.interfaceCache[33000];
-                                  System.out.println(Arrays.toString(pouch.inventoryItemId));
                                   for (int i = 0; i < pouch.inventoryItemId.length; i++) {
                                       if (pouch.inventoryItemId[i] == item + 1) {
                                           value += pouch.inventoryAmounts[i];
