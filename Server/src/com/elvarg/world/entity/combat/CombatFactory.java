@@ -45,6 +45,7 @@ import com.elvarg.world.model.Position;
 import com.elvarg.world.model.Skill;
 import com.elvarg.world.model.SkullType;
 import com.elvarg.world.model.container.impl.Equipment;
+import com.elvarg.world.model.equipment.BonusManager;
 import com.elvarg.world.model.movement.path.RS317PathFinder;
 
 /**
@@ -175,6 +176,49 @@ public class CombatFactory {
 			if (entity.isPlayer()) {
 
 				Player player = entity.getAsPlayer();
+				
+				int weapon = entity.getAsPlayer().getEquipment().getItems()[Equipment.WEAPON_SLOT].getId();
+                int multiply1;
+                double maxhit = 0;
+                if (victim.isNpc() && weapon == 20997) {
+                    NPC t = victim.getAsNpc();
+                    multiply1 = t.getDefinition().getMagicLevel();    
+                    int Attackrange = (int) entity.getAsPlayer().getBonusManager().getAttackBonus()[BonusManager.ATTACK_RANGE];
+                    if (Attackrange > 109 && Attackrange <= 170) {
+                        Attackrange = 80;
+                    } else if (Attackrange > 170) {
+                        Attackrange = 103;
+                    }
+                    if(multiply1 > 1) {
+                        maxhit = Attackrange + 41 + (0.3 * multiply1 - 14 ) / 100 - Math.pow(Math.floor(0.3 * multiply1 - 140), 2) / 100;
+                        entity.getAsPlayer().getPacketSender().sendMessage("Your Twisted bow max hit is: "+Math.floor(maxhit)+ "on, " + multiply1 +" Magic level.");
+                        damage = Misc.getRandom((int) Math.floor(maxhit));
+                    }            
+                }
+                
+                
+                if (victim.isPlayer() && weapon == 20997) {
+                    int multiply;
+                    Player t1 = victim.getAsPlayer();
+                    int Attackmage = (int) t1.getBonusManager().getAttackBonus()[BonusManager.ATTACK_MAGIC];
+                    int Attackrange = (int) entity.getAsPlayer().getBonusManager().getAttackBonus()[BonusManager.ATTACK_RANGE];
+                    multiply = t1.getSkillManager().getCurrentLevel(Skill.MAGIC);
+                    if (multiply < Attackmage) {
+                        multiply = Attackmage;
+                    }
+                    if (Attackrange > 109 && Attackrange <= 170) {
+                        Attackrange = 80;
+                    } else if (Attackrange > 170) {
+                        Attackrange = 103;
+                    }
+                    if(multiply > 1) {
+                        maxhit = Attackrange + 41 + (0.3 * multiply - 14 ) / 100 - Math.pow(Math.floor(0.3 * multiply - 140), 2) / 100;
+                        entity.getAsPlayer().getPacketSender().sendMessage("Your Twisted bow max hit is: "+Math.floor(maxhit)+ "on, " + multiply +" Mage.");
+                        damage = Misc.getRandom((int) Math.floor(maxhit));
+                    }    
+                }
+                
+				
 
 				//Check if player is using dark bow and set damage to minimum 8, maxmimum 48 if that's the case...
 				if(player.getAsPlayer().isSpecialActivated()
