@@ -38,11 +38,14 @@ public final class SceneObject extends Renderable {
 		} else if (anInt1602 != -1 && anInt1602 < clientInstance.settings.length) {
 			i = clientInstance.settings[anInt1602];
 		}
-		if (i < 0 || i >= anIntArray1600.length || anIntArray1600[i] == -1) {
-			return null;
-		} else {
-			return ObjectDefinition.lookup(anIntArray1600[i]);
-		}
+		int var;
+		if (i >= 0 && i < anIntArray1600.length) {
+			var = anIntArray1600[i];
+		} else 
+			var = anIntArray1600[anIntArray1600.length - 1];
+		
+		return var != -1 ? ObjectDefinition.lookup(var) : null;
+		
 	}
 
 	public Model getRotatedModel() {

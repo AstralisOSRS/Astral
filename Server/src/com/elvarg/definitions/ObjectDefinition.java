@@ -438,20 +438,30 @@ public final class ObjectDefinition {
 				hollow  = true;
 			else if (type == 75)
 				supportItems = stream.getUByte();
-			else if (type == 77) {
+			else if (type == 77 || type == 92) {
 				varp = stream.getUShort();
 				if (varp == 65535)
 					varp = -1;
 				varbit = stream.getUShort();
 				if (varbit == 65535)
 					varbit = -1;
+				
+				int var3 = -1;
+				if(type == 92){
+					var3 = stream.getUShort();
+
+					if(var3 == 65535)
+						var3 = -1;
+				}
+				
 				int j1 = stream.getUByte();
-				childrenIDs = new int[j1 + 1];
+				childrenIDs = new int[j1 + 2];
 				for (int j2 = 0; j2 <= j1; j2++) {
 					childrenIDs[j2] = stream.getUShort();
 					if (childrenIDs[j2] == 65535)
 						childrenIDs[j2] = -1;
 				}
+				childrenIDs[j1 + 1] = var3;
 			}
 		} while (true);
 		if (name != "null" && name != null) {

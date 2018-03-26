@@ -379,10 +379,15 @@ public final class ObjectDefinition {
 			i = clientInstance.settings[j] >> k & i1;
 		} else if (varp != -1)
 			i = clientInstance.settings[varp];
-		if (i < 0 || i >= childrenIDs.length || childrenIDs[i] == -1)
-			return null;
-		else
-			return lookup(childrenIDs[i]);
+		
+		int var;
+		
+		if (i >= 0 && i < childrenIDs.length) {
+			var = childrenIDs[i];
+		} else 
+			var = childrenIDs[childrenIDs.length - 1];
+		
+		return var != -1 ? lookup(var) : null;
 	}
 
 	public Model model(int j, int k, int l) {

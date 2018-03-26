@@ -15730,7 +15730,7 @@ public class Client extends GameApplet {
 		anIntArray968 = new int[33];
 		anIntArray969 = new int[256];
 		indices = new FileStore[5];
-		settings = new int[2000];
+		settings = new int[10000];
 		aBoolean972 = false;
 		anInt975 = 50;
 		anIntArray976 = new int[anInt975];
