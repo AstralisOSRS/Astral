@@ -9640,32 +9640,32 @@ public class Client extends GameApplet {
 			if (anInt1117 > 1151) {
 				anInt1117 = 0;
 				// anti-cheat
-				/*outgoing.writeOpcode(246);
-				outgoing.writeByte(0);
-				int bufPos = outgoing.currentPosition;                        
+			/*	outgoing.putOpcode(246);
+				outgoing.putByte(0);
+				int bufPos = outgoing.getPosition();                        
 
 				if ((int) (Math.random() * 2D) == 0) {
-					outgoing.writeByte(101);
+					outgoing.putByte(101);
 				}
 
-				outgoing.writeByte(197);
-				outgoing.writeShort((int) (Math.random() * 65536D));
-				outgoing.writeByte((int) (Math.random() * 256D));
-				outgoing.writeByte(67);
-				outgoing.writeShort(14214);
+				outgoing.putByte(197);
+				outgoing.putShort((int) (Math.random() * 65536D));
+				outgoing.putByte((int) (Math.random() * 256D));
+				outgoing.putByte(67);
+				outgoing.putShort(14214);
 
 				if ((int) (Math.random() * 2D) == 0) {
-					outgoing.writeShort(29487);
+					outgoing.putShort(29487);
 				}
 
-				outgoing.writeShort((int) (Math.random() * 65536D));
+				outgoing.putShort((int) (Math.random() * 65536D));
 
 				if ((int) (Math.random() * 2D) == 0) {
-					outgoing.writeByte(220);
+					outgoing.putByte(220);
 				}
 
-				outgoing.writeByte(180);
-				outgoing.writeBytes(outgoing.currentPosition - bufPos);*/
+				outgoing.putByte(180);
+				outgoing.putByte(outgoing.getPosition() - bufPos);*/
 			}
 		}
 	}
@@ -12050,18 +12050,28 @@ public class Client extends GameApplet {
 					value = currentExp[script[counter++]];
 				}
 
-				if (instruction == 4) {
-					Widget other = Widget.interfaceCache[script[counter++]];
-					int item = script[counter++];
-					if (item >= 0 && item < ItemDefinition.item_count
-							&& (!ItemDefinition.lookup(item).is_members_only
-									|| isMembers)) {
-						for (int slot = 0; slot < other.inventoryItemId.length; slot++)
-							if (other.inventoryItemId[slot] == item + 1)
-								value += other.inventoryAmounts[slot];
+			      if (instruction == 4) {
+                      Widget other = Widget.interfaceCache[script[counter++]];
+                      int item = script[counter++];
+                      if (item >= 0 && item < ItemDefinition.item_count && (!ItemDefinition.lookup(item).is_members_only || isMembers)) {
+                          for (int slot = 0; slot < other.inventoryItemId.length; slot++) {
+                              if (other.inventoryItemId[slot] == item + 1) {
+                                  value += other.inventoryAmounts[slot];
+                              }
 
-					}
-				}
+                              // Rune pouch lighting up spells
+                              if (other.inventoryItemId[slot] == 12792) {
+                                  Widget pouch = Widget.interfaceCache[33000];
+                                  System.out.println(Arrays.toString(pouch.inventoryItemId));
+                                  for (int i = 0; i < pouch.inventoryItemId.length; i++) {
+                                      if (pouch.inventoryItemId[i] == item + 1) {
+                                          value += pouch.inventoryAmounts[i];
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }    
 				if (instruction == 5) {
 					value = settings[script[counter++]];
 				}
@@ -14433,6 +14443,7 @@ public class Client extends GameApplet {
 				opcode = -1;
 				return true;
 			}
+
 
 			if (opcode == PacketConstants.SEND_MESSAGE) {
 				String message = incoming.readString();

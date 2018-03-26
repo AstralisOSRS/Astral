@@ -102,5 +102,5 @@ public class Runepouch extends ItemContainer {
         }
     }
 
-    public static final int INTERFACE_ID = 32900;
+    public static final int INTERFACE_ID = 33000;
 }

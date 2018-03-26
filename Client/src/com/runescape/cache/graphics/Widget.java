@@ -300,6 +300,7 @@ public final class Widget {
 		mainTeleports();
 		normalSpellbookEdit(textDrawingAreas);
 		ancientSpellbookEdit(textDrawingAreas);
+		Runepouch(textDrawingAreas); // god you life saver xD
 		settingsTab();
 
 		pvpTab(textDrawingAreas);
@@ -1181,12 +1182,33 @@ public final class Widget {
 	        addHoverButton_sprite_loader(32902, 107, 21, 21, "Close", -1, 32903, 1);
 	        addHoveredButton_sprite_loader(32903, 108, 21, 21, 32904);
 	    
-	        tab.totalChildren(3);
+	        //lol its never loaded ;--0 l000l i forgot sec
+	      //Actual items
+			Widget container = addTabInterface(33000);
+			container.spritesX = new int[20];
+			container.spritesY = new int[20];
+			container.inventoryItemId = new int[24];
+			container.inventoryAmounts = new int[24];
+			container.centerText = true;
+			container.filled = false;
+			container.replaceItems = false;
+			container.usableItems = true;
+			//rsi.isInventoryInterface = false;
+			container.allowSwapItems = false;
+			container.spritePaddingX = 50;
+			container.spritePaddingY = 30;
+			container.height = 6;
+			container.width = 6;
+			container.parent = 32900;
+			container.type = TYPE_INVENTORY;
+			
+	        tab.totalChildren(4);
 	        
 	        
 	        tab.child(0, 32901, 100, 88); // RunePouch Top part
 	        tab.child(1, 32902, 422, 94);
 	        tab.child(2, 32903, 422, 94);
+	        tab.child(3, 33000, 160, 88);
 	        
 	    }
 
