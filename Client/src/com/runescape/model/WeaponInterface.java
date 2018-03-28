@@ -10,6 +10,7 @@ import java.util.Map;
  * @author lare96
  */
 public enum WeaponInterface {
+	Toxic_Staff(328, 7474, 7486),
 	STAFF(328),
 	WARHAMMER(425, 7474, 7486),
 	MAUL(425, 7474, 7486),

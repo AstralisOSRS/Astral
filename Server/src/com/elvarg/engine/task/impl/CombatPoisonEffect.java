@@ -74,11 +74,11 @@ public class CombatPoisonEffect extends Task {
             return;
         }
 
-        if (entity.isPoisoned()) {
+        if (entity.isPoisoned() && PoisonType.VENOM == null) {
         	// Deal the damage, then try and decrement the damage count.
-        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.DARK_GREEN));
+        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.GREEN));
         } else if (entity.isPoisoned() && PoisonType.VENOM != null) {
-        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.DARK_PURPLE));
+        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.LIGHT_YELLOW));
         }
     }
 
@@ -198,6 +198,7 @@ public class CombatPoisonEffect extends Task {
             types.put(13271, PoisonType.SUPER);
             
             types.put(12926, PoisonType.VENOM);
+            types.put(12904, PoisonType.VENOM);
         }
 
         /**

@@ -5310,7 +5310,7 @@ public class Client extends GameApplet {
 					savePlayerData();
 					break;
 					
-				/** Faster spec bars toggle **/
+/** Faster spec bars toggle **/
 				case 29138:
 				case 29038:
 				case 29063:
@@ -5363,7 +5363,6 @@ public class Client extends GameApplet {
 				}
 			}
 		}
-
 		// player option
 		if (action == 561) {
 			Player player = players[clicked];
@@ -12619,6 +12618,7 @@ public class Client extends GameApplet {
 			}
 
 	}
+
 
 	private void requestSpawnObject(int longetivity, int id, int orientation, int group, int y, int type,
 			int plane, int x, int delay) {
