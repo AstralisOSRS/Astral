@@ -119,10 +119,21 @@ public class AccuracyFormulas {
 		
 		//Cheaphax to boost magic accuracy
 		if(type == CombatType.MAGIC) {
-			//25% more accuracy
-			attackAccuracy *= 1.25;
+			//5% more accuracy
+			attackAccuracy *= 1.05;
 		}
 		
+		/*
+		 * 	Detect that the attacker has an increase of armour than the victim
+		 *	and if the attacker has higher defence bonus or equal to the victim one then it will have the same
+		 * Attack Accuracy.
+		 */		
+			if (type == CombatType.MELEE) {
+			double GetDefenceBonusvictim = victim.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
+			double GetDefenceBonusattacker = attacker.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
+			double calculatedifference = GetDefenceBonusattacker - GetDefenceBonusvictim;
+			attackAccuracy = Math.floor(equipmentBonus + attacker.getBaseAttack(type)) + calculatedifference;
+		}
 		//Style bonus shouldn't affect magic right now because
 		//We don't have defensive magic casting for def xp
 		if(type != CombatType.MAGIC) {
