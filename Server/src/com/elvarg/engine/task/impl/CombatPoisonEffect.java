@@ -8,6 +8,7 @@ import com.elvarg.engine.task.Task;
 import com.elvarg.world.entity.combat.hit.HitDamage;
 import com.elvarg.world.entity.combat.hit.HitMask;
 import com.elvarg.world.entity.impl.Character;
+import com.elvarg.world.model.Hitmask;
 import com.elvarg.world.model.Item;
 /**
  * A {@link Task} implementation that handles the poisoning process.
@@ -73,8 +74,12 @@ public class CombatPoisonEffect extends Task {
             return;
         }
 
-        // Deal the damage, then try and decrement the damage count.
-        entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.GREEN));
+        if (entity.isPoisoned()) {
+        	// Deal the damage, then try and decrement the damage count.
+        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.DARK_GREEN));
+        } else if (entity.isPoisoned() && PoisonType.VENOM != null) {
+        	entity.getCombat().getHitQueue().addPendingDamage(new HitDamage(entity.getAndDecrementPoisonDamage(), HitMask.DARK_PURPLE));
+        }
     }
 
     /**

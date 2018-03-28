@@ -83,7 +83,7 @@ public class Runepouch extends ItemContainer {
 
     @Override
     public Runepouch full() {
-        getPlayer().getPacketSender().sendMessage("Not enough space in your RunePouch.");
+        getPlayer().getPacketSender().sendMessage("Not enough space in your Runepouch.");
         return this;
     }
 
