@@ -128,7 +128,7 @@ public class AccuracyFormulas {
 		 *	and if the attacker has higher defence bonus or equal to the victim one then it will have the same
 		 * Attack Accuracy.
 		 */		
-			if (type == CombatType.MELEE) {
+			if (type == CombatType.MELEE && victim.isPlayer() && attacker.isPlayer()) {
 				double GetDefenceBonusvictim = victim.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
 				double GetDefenceBonusattacker = attacker.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
 				double calculatedifference = GetDefenceBonusattacker - GetDefenceBonusvictim;
