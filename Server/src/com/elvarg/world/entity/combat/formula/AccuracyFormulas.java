@@ -129,112 +129,114 @@ public class AccuracyFormulas {
 		 * Attack Accuracy.
 		 */		
 			if (type == CombatType.MELEE) {
-			double GetDefenceBonusvictim = victim.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
-			double GetDefenceBonusattacker = attacker.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
-			double calculatedifference = GetDefenceBonusattacker - GetDefenceBonusvictim;
-			attackAccuracy = Math.floor(equipmentBonus + attacker.getBaseAttack(type)) + calculatedifference;
-		}
-		//Style bonus shouldn't affect magic right now because
-		//We don't have defensive magic casting for def xp
-		if(type != CombatType.MAGIC) {
-			attackAccuracy += styleBonus;
-
-			if(equipmentBonus < -67) {
-				attackAccuracy = Misc.getRandom(8) == 0 ? attackAccuracy : 0;
+				double GetDefenceBonusvictim = victim.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
+				double GetDefenceBonusattacker = attacker.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];
+				double calculatedifference = GetDefenceBonusattacker - GetDefenceBonusvictim;
+				attackAccuracy = Math.floor(equipmentBonus + attacker.getBaseAttack(type)) + calculatedifference;
+				if (attackAccuracy < Math.floor(equipmentBonus + attacker.getBaseAttack(type)) + 8) {
+					attackAccuracy = Math.floor(equipmentBonus + attacker.getBaseAttack(type)) + 8;
+				}
 			}
-
-		} else {
-			if (equipmentBonus <= -67) {
-				attackAccuracy = 0;
-			}
-		}
-
-		equipmentBonus = 1;
-		prayerMod = 1;
-		styleBonus = 2;
-		if (victim.isPlayer()) {
-			Player player = (Player) victim;
-
-			if (bonusType == -1) {
-				equipmentBonus = type == CombatType.MAGIC ? player.getBonusManager().getDefenceBonus()[BonusManager.DEFENCE_MAGIC]
-						: player.getSkillManager().getCurrentLevel(Skill.DEFENCE);
+			//Style bonus shouldn't affect magic right now because
+			//We don't have defensive magic casting for def xp
+			if(type != CombatType.MAGIC) {
+				attackAccuracy += styleBonus;
+	
+				if(equipmentBonus < -67) {
+					attackAccuracy = Misc.getRandom(8) == 0 ? attackAccuracy : 0;
+				}
+	
 			} else {
-				equipmentBonus = type == CombatType.MAGIC ? player.getBonusManager().getDefenceBonus()[BonusManager.DEFENCE_MAGIC]
-						: player.getBonusManager().getDefenceBonus()[bonusType];
+				if (equipmentBonus <= -67) {
+					attackAccuracy = 0;
+				}
 			}
-
-			if (PrayerHandler.isActivated(player, PrayerHandler.THICK_SKIN)) {
-				prayerMod += 0.05;
-			} else if (PrayerHandler.isActivated(player, PrayerHandler.ROCK_SKIN)) {
-				prayerMod += 0.10;
-			} else if (PrayerHandler.isActivated(player, PrayerHandler.STEEL_SKIN)) {
-				prayerMod += 0.15;
-			} else if (PrayerHandler.isActivated(player, PrayerHandler.CHIVALRY)) {
-				prayerMod += 0.20;
-			} else if (PrayerHandler.isActivated(player, PrayerHandler.PIETY) 
-					|| PrayerHandler.isActivated(player, PrayerHandler.RIGOUR)
-					|| PrayerHandler.isActivated(player, PrayerHandler.AUGURY)) {
-				prayerMod += 0.25;
-			}
-			
-			//Check for enemy magic defence
-			if(type == CombatType.MAGIC) {
-				if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_WILL)) {
+	
+			equipmentBonus = 1;
+			prayerMod = 1;
+			styleBonus = 2;
+			if (victim.isPlayer()) {
+				Player player = (Player) victim;
+	
+				if (bonusType == -1) {
+					equipmentBonus = type == CombatType.MAGIC ? player.getBonusManager().getDefenceBonus()[BonusManager.DEFENCE_MAGIC]
+							: player.getSkillManager().getCurrentLevel(Skill.DEFENCE);
+				} else {
+					equipmentBonus = type == CombatType.MAGIC ? player.getBonusManager().getDefenceBonus()[BonusManager.DEFENCE_MAGIC]
+							: player.getBonusManager().getDefenceBonus()[bonusType];
+				}
+	
+				if (PrayerHandler.isActivated(player, PrayerHandler.THICK_SKIN)) {
 					prayerMod += 0.05;
-				} else if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_LORE)) {
-					prayerMod += 0.1;
-				} else if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_MIGHT)) {
+				} else if (PrayerHandler.isActivated(player, PrayerHandler.ROCK_SKIN)) {
+					prayerMod += 0.10;
+				} else if (PrayerHandler.isActivated(player, PrayerHandler.STEEL_SKIN)) {
 					prayerMod += 0.15;
-				} else if (PrayerHandler.isActivated(player, PrayerHandler.AUGURY)) {
+				} else if (PrayerHandler.isActivated(player, PrayerHandler.CHIVALRY)) {
+					prayerMod += 0.20;
+				} else if (PrayerHandler.isActivated(player, PrayerHandler.PIETY) 
+						|| PrayerHandler.isActivated(player, PrayerHandler.RIGOUR)
+						|| PrayerHandler.isActivated(player, PrayerHandler.AUGURY)) {
 					prayerMod += 0.25;
 				}
-			}
-
-			//PROTECTION PRAYERS DEFENSIVE
-			if (PrayerHandler.isActivated(player, PrayerHandler.getProtectingPrayer(type))) {
-				if(attacker.isPlayer()) {
-					prayerMod += CombatConstants.PRAYER_ACCURACY_REDUCTION_AGAINST_PLAYERS;
-				} else if(attacker.isNpc()) {
-					prayerMod += CombatConstants.PRAYER_ACCURACY_REDUCTION_AGAINST_NPCS;
+				
+				//Check for enemy magic defence
+				if(type == CombatType.MAGIC) {
+					if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_WILL)) {
+						prayerMod += 0.05;
+					} else if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_LORE)) {
+						prayerMod += 0.1;
+					} else if (PrayerHandler.isActivated(player, PrayerHandler.MYSTIC_MIGHT)) {
+						prayerMod += 0.15;
+					} else if (PrayerHandler.isActivated(player, PrayerHandler.AUGURY)) {
+						prayerMod += 0.25;
+					}
+				}
+	
+				//PROTECTION PRAYERS DEFENSIVE
+				if (PrayerHandler.isActivated(player, PrayerHandler.getProtectingPrayer(type))) {
+					if(attacker.isPlayer()) {
+						prayerMod += CombatConstants.PRAYER_ACCURACY_REDUCTION_AGAINST_PLAYERS;
+					} else if(attacker.isNpc()) {
+						prayerMod += CombatConstants.PRAYER_ACCURACY_REDUCTION_AGAINST_NPCS;
+					}
+				}
+	
+	
+				if (player.getCombat().getFightType().getStyle() == FightStyle.DEFENSIVE) {
+					styleBonus = 3;
+				} else if (player.getCombat().getFightType().getStyle() == FightStyle.CONTROLLED) {
+					styleBonus = 1;
 				}
 			}
-
-
-			if (player.getCombat().getFightType().getStyle() == FightStyle.DEFENSIVE) {
-				styleBonus = 3;
-			} else if (player.getCombat().getFightType().getStyle() == FightStyle.CONTROLLED) {
-				styleBonus = 1;
+			
+			double defenceCalc = Math.floor(equipmentBonus + victim.getBaseDefence(type)) + 8;
+			defenceCalc *= prayerMod;
+	
+			if(type != CombatType.MAGIC) {
+				defenceCalc += styleBonus;
+				if(equipmentBonus < -67) {
+					defenceCalc = Misc.getRandom(8) == 0 ? defenceCalc : 0;
+				}
+	
+			} else {
+				if (equipmentBonus <= -67) {
+					defenceCalc = 0;
+				}
 			}
-		}
-		
-		double defenceCalc = Math.floor(equipmentBonus + victim.getBaseDefence(type)) + 8;
-		defenceCalc *= prayerMod;
-
-		if(type != CombatType.MAGIC) {
-			defenceCalc += styleBonus;
-
-			if(equipmentBonus < -67) {
-				defenceCalc = Misc.getRandom(8) == 0 ? defenceCalc : 0;
-			}
-
-		} else {
-			if (equipmentBonus <= -67) {
+	
+			//Veracs was triggered (25% chance)
+			//Ignore all defences (armour and protection prayers)
+			if (veracEffect) {
 				defenceCalc = 0;
 			}
+	
+			double A = Math.floor(attackAccuracy);
+			double D = Math.floor(defenceCalc);
+			double hitSucceed = A < D ? (A - 1.0) / (2.0 * D)
+					: 1.0 - (D + 1.0) / (2.0 * A);
+			hitSucceed = hitSucceed >= 1.0 ? 0.99 : hitSucceed <= 0.0 ? 0.01
+					: hitSucceed;
+			return hitSucceed >= Misc.getRandomDouble();
 		}
-
-		//Veracs was triggered (25% chance)
-		//Ignore all defences (armour and protection prayers)
-		if (veracEffect) {
-			defenceCalc = 0;
-		}
-
-		double A = Math.floor(attackAccuracy);
-		double D = Math.floor(defenceCalc);
-		double hitSucceed = A < D ? (A - 1.0) / (2.0 * D)
-				: 1.0 - (D + 1.0) / (2.0 * A);
-		hitSucceed = hitSucceed >= 1.0 ? 0.99 : hitSucceed <= 0.0 ? 0.01
-				: hitSucceed;
-		return hitSucceed >= Misc.getRandomDouble();
 	}
-}

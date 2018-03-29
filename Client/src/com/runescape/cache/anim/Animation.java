@@ -13,7 +13,7 @@ public final class Animation {
 		for(int j = 0; j < length; j++) {
 			if(animations[j] == null)
 				animations[j] = new Animation();
-			animations[j].decode(stream);
+			animations[j].readValues(stream);
 
 		}
 		
@@ -34,55 +34,53 @@ public final class Animation {
 		return j;
 	}
 
-	private void decode(Buffer stream) {
-		int opcode;
-		while ((opcode = stream.readUnsignedByte()) != 0) {
+	private void readValues(Buffer stream) {
+		int i;
+		while ((i = stream.readUnsignedByte()) != 0){
 
-			if (opcode == 1) {
+
+			if (i == 1) {
 				frameCount = stream.readUShort();
 				primaryFrames = new int[frameCount];
 				secondaryFrames = new int[frameCount];
 				durations = new int[frameCount];
-				for (int i = 0; i < frameCount; i++) {					
-					primaryFrames[i] = stream.readInt();
-					secondaryFrames[i] = -1;
+				for (int j = 0; j < frameCount; j++) {
+					primaryFrames[j] = stream.readInt();
+					secondaryFrames[j] = -1;
 				}
 
-				for (int i = 0; i < frameCount; i++) {					
-					durations[i] = stream.readUnsignedByte();
-				}
 
-			} else if (opcode == 2) {
+				for (int j = 0; j < frameCount; j++)
+					durations[j] = stream.readUnsignedByte();
+
+			} else if (i == 2)
 				loopOffset = stream.readUShort();
-			} else if (opcode == 3) {
-				int length = stream.readUnsignedByte();				
-				interleaveOrder = new int[length + 1];
-				for (int i = 0; i < length; i++) {					
-					interleaveOrder[i] = stream.readUnsignedByte();
-				}
-				interleaveOrder[length] = 9999999;
-			} else if (opcode == 4) {
+			else if (i == 3) {
+				int k = stream.readUnsignedByte();
+				interleaveOrder = new int[k + 1];
+				for (int l = 0; l < k; l++)
+					interleaveOrder[l] = stream.readUnsignedByte();
+				interleaveOrder[k] = 9999999;
+			} else if (i == 4)
 				stretches = true;
-			} else if (opcode == 5) {
+			else if (i == 5)
 				forcedPriority = stream.readUnsignedByte();
-			}	else if (opcode == 6) {
-					playerOffhand = stream.readUShort();
-			}	else if (opcode == 7) {
-					playerMainhand = stream.readUShort();
-			} else if (opcode == 8) {
+			else if (i == 6)
+				playerOffhand = stream.readUShort();
+			else if (i == 7)
+				playerMainhand = stream.readUShort();
+			else if (i == 8)
 				maximumLoops = stream.readUnsignedByte();
-			} else if (opcode == 9) {
+			else if (i == 9)
 				animatingPrecedence = stream.readUnsignedByte();
-			} else if (opcode == 10) {
+			else if (i == 10)
 				priority = stream.readUnsignedByte();
-			} else if (opcode == 11) {
+			else if (i == 11)
 				replayMode = stream.readUnsignedByte();
-			} else if (opcode == 12) {
+			else if (i == 12)
 				stream.readInt();
-			} else {
-				System.out.println("Error unrecognised seq config code: " + opcode);
-			}
-
+			else
+				System.out.println("Error unrecognised seq config code: " + i);
 		}
 		if (frameCount == 0) {
 			frameCount = 1;
@@ -94,11 +92,10 @@ public final class Animation {
 			durations[0] = -1;
 		}
 		if (animatingPrecedence == -1)
-			if (interleaveOrder != null) {
+			if (interleaveOrder != null)
 				animatingPrecedence = 2;
-			} else {
+			else
 				animatingPrecedence = 0;
-			}
 		if (priority == -1) {
 			if (interleaveOrder != null) {
 				priority = 2;
