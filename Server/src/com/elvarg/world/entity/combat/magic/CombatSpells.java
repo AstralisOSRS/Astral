@@ -1777,11 +1777,11 @@ public enum CombatSpells {
 					return;
 				}
 
-				final int seconds = player.getPrayerActive()[PrayerHandler.PROTECT_FROM_MAGIC] ? 300 : 600;
+				final int seconds = player.getPrayerActive()[PrayerHandler.PROTECT_FROM_MAGIC] ? 120 : 300;
 				
 				player.getCombat().getTeleBlockTimer().start(seconds);
 				player.getPacketSender().sendEffectTimer(seconds, EffectTimer.TELE_BLOCK)
-				.sendMessage("You have just been teleblocked!");
+				.sendMessage("@red@You have just been teleblocked!");
 				
 			} else if (castOn.isNpc()) {
 				if (cast.isPlayer()) {

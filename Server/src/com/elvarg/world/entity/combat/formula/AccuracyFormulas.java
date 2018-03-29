@@ -127,6 +127,7 @@ public class AccuracyFormulas {
 		 * 	Detect that the attacker has an increase of armour than the victim
 		 *	and if the attacker has higher defence bonus or equal to the victim one then it will have the same
 		 * Attack Accuracy.
+		 * By @Embolden
 		 */		
 			if (type == CombatType.MELEE && victim.isPlayer() && attacker.isPlayer()) {
 				double GetDefenceBonusvictim = victim.getAsPlayer().getBonusManager().getDefenceBonus()[bonusType];

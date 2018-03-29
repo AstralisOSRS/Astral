@@ -47,7 +47,7 @@ public abstract class CombatSpell extends Spell {
 		// Finally send the projectile after two ticks.
 		castProjectile(cast, castOn).ifPresent(g -> {
 			//g.sendProjectile();
-			TaskManager.submit(new Task(2, cast, false) {
+			TaskManager.submit(new Task(2, cast, true) {
 				@Override
 				public void execute() {
 					g.sendProjectile();

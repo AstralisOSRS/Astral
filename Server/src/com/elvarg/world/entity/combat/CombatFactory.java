@@ -481,8 +481,8 @@ public class CombatFactory {
 					if(npc.getLocation() != Location.WILDERNESS) {
 						p.getPacketSender().sendMessage("That bot cannot be attacked, because they are not in the Wilderness.");
 						p.getMovementQueue().reset();
-						//p.getCombat().reset();
-						//return false;
+						p.getCombat().reset();
+						return false;
 					}
 					int combatDiff = combatLevelDifference(p.getSkillManager().getCombatLevel(), npc.getDefinition().getCombatLevel());
 					if (combatDiff > 5) {
@@ -758,11 +758,12 @@ public class CombatFactory {
 			if (!player.getCombat().getPoisonImmunityTimer().finished()) {
 				return;
 			}
-			player.getPacketSender().sendMessage("You have been poisoned!");
+			if (entity.isPoisoned() != true && entity.getPoisonDamage() == 0 ) {
+				player.getPacketSender().sendMessage("@red@You have been poisoned!");
+				entity.setPoisonDamage(poisonType.getDamage());
+				TaskManager.submit(new CombatPoisonEffect(entity));
+			}
 		}
-
-		entity.setPoisonDamage(poisonType.getDamage());
-		TaskManager.submit(new CombatPoisonEffect(entity));
 	}
 
 	/**
@@ -1005,16 +1006,16 @@ public class CombatFactory {
 		//Make us immune for at least 2 seconds after freeze expired
 		character.getCombat().getFreezeImmunityTimer().start(seconds + 3);
 
-		character.getMovementQueue().reset();
 		if(character.isPlayer()) {
 
+			character.getMovementQueue().reset();
 			//Send message and effect timer to client
-			character.getAsPlayer().getPacketSender().sendMessage("You have been frozen!")
+			character.getAsPlayer().getPacketSender().sendMessage("@red@You have been frozen!")
 			.sendEffectTimer(seconds, EffectTimer.FREEZE);
 
 			//Actually reset combat too
-			//I think it's that way on osrs
-			character.getCombat().reset();
+			//I think it's that way on osrs, no nigga it's not l0l
+			//character.getCombat().reset();
 		}
 	}
 
