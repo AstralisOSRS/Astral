@@ -78,10 +78,11 @@ public class ObjectActionPacketListener implements PacketListener {
 				switch(id) {
 
 				case BANK_CHEST:
-					if (player.getPosition().getZ() > 0) {
-						player.getPacketSender().sendMessage("you can't use this at edgepvp.");
+					if (player.getPosition().getZ() == 0) {
+						player.getBank(player.getCurrentBankTab()).open();
+					} else {
+						player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
 					}
-					player.getBank(player.getCurrentBankTab()).open();
 					break;
 					
 				  case MAXHIT_DUMMY:
@@ -120,11 +121,11 @@ public class ObjectActionPacketListener implements PacketListener {
 					break;
 
 				case MAGICAL_ALTAR:
-					if (player.getPosition().getZ() == 0) {
 					DialogueManager.start(player, 8);
 					player.setDialogueOptions(new DialogueOptions() {
 						@Override
 						public void handleOption(Player player, int option) {
+							if (player.getPosition().getZ() == 0) {
 							switch(option) {
 							case 1: //Normal spellbook option
 								player.getPacketSender().sendInterfaceRemoval();
@@ -143,15 +144,21 @@ public class ObjectActionPacketListener implements PacketListener {
 								break;
 								
 							}
+							} else {
+								player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
+							}
 						}
 					});
-				}
 				break;
 
 				case REJUVENATION_POOL:
+					if (player.getPosition().getZ() == 0) {
 					player.getPacketSender().sendMessage("You feel slightly renewed.");
 					player.performGraphic(new Graphic(683));
 					player.restart(false);
+					} else {
+						player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
+					}
 					break;
 
 				}
