@@ -78,6 +78,9 @@ public class ObjectActionPacketListener implements PacketListener {
 				switch(id) {
 
 				case BANK_CHEST:
+					if (player.getPosition().getZ() > 0) {
+						player.getPacketSender().sendMessage("you can't use this at edgepvp.");
+					}
 					player.getBank(player.getCurrentBankTab()).open();
 					break;
 					
@@ -117,6 +120,7 @@ public class ObjectActionPacketListener implements PacketListener {
 					break;
 
 				case MAGICAL_ALTAR:
+					if (player.getPosition().getZ() == 0) {
 					DialogueManager.start(player, 8);
 					player.setDialogueOptions(new DialogueOptions() {
 						@Override
@@ -137,10 +141,12 @@ public class ObjectActionPacketListener implements PacketListener {
 							case 4: //Cancel option
 								player.getPacketSender().sendInterfaceRemoval();
 								break;
+								
 							}
 						}
-					});				
-					break;
+					});
+				}
+				break;
 
 				case REJUVENATION_POOL:
 					player.getPacketSender().sendMessage("You feel slightly renewed.");

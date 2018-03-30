@@ -70,7 +70,7 @@ public abstract class CombatAncientSpell extends CombatSpell {
 				}
 			} else {
 				Player p = (Player)next;
-				if(p.getLocation() != Location.WILDERNESS || !Location.inMulti(p)) {
+				if(p.getLocation() != Location.WILDERNESS || p.getLocation() != Location.EDGE_PVP|| !Location.inMulti(p)) {
             		continue;
             	}
 			}

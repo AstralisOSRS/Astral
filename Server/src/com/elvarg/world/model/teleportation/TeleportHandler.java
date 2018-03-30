@@ -64,7 +64,7 @@ public class TeleportHandler {
 			return false;
 		}
 		if(!player.getCombat().getTeleBlockTimer().finished()) {
-			if(player.getLocation() == Location.WILDERNESS) {
+			if(player.getLocation() == Location.WILDERNESS || player.getLocation() == Location.EDGE_PVP) {
 				player.getPacketSender().sendMessage("A magical spell is blocking you from teleporting.");
 				return false;
 			} else {

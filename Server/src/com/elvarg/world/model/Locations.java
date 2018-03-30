@@ -31,7 +31,7 @@ public class Locations {
 		WILDERNESS(new int[]{2940, 3392, 2986, 3012, 3650, 3653, 3012, 3059, 3008, 3070, 2250, 2295, 2760,
                 2805, 2830, 2885, 2505, 2550},
         new int[]{3525, 3968, 10338, 10366, 3457, 3472, 10303, 10351, 10235, 10300, 4675, 4729,
-                10120, 10180, 10105, 10150, 4760, 4795},false, true,
+                10120, 10180, 10105, 10150, 4760, 4795}, new int[]{0},false, true,
 				true, true, true, true) {
 			@Override
 			public void process(Player player) {
@@ -68,7 +68,7 @@ public class Locations {
 			@Override
 			public boolean canAttack(Player attacker, Player target) {
 				int combatDifference = CombatFactory.combatLevelDifference(attacker.getSkillManager().getCombatLevel(), target.getSkillManager().getCombatLevel());
-				if (combatDifference > attacker.getWildernessLevel() + 5 || combatDifference > target.getWildernessLevel() + 5) {
+				if (combatDifference > attacker.getWildernessLevel() || combatDifference > target.getWildernessLevel()) {
 					attacker.getPacketSender().sendMessage("Your combat level difference is too great to attack that player here.").sendMessage("Move deeper into the wilderness first.");
 					attacker.getMovementQueue().reset();
 					return false;
@@ -81,7 +81,57 @@ public class Locations {
 				return true;
 			}
 		},
-		DUEL_ARENA(new int[]{3322, 3394, 3311, 3323, 3331, 3391}, new int[]{3195, 3291, 3223, 3248, 3242, 3260}, false, true, true, true, true, true) {
+		EDGE_PVP(new int[]{3070, 3106, 3077, 3099},
+        new int[]{3446, 3487, 3486, 3446}, new int[]{20},false, true,
+				true, true, true, true) {
+			@Override
+			public void process(Player player) {
+				int combatleast = player.getSkillManager().getCombatLevel()-player.getWildernessLevel();
+				player.setWildernessLevel(12);
+				player.getPacketSender().sendString(23321, "PVP: "+player.getSkillManager().getCombatLevel()+"-"+combatleast);
+			}
+
+			@Override
+			public void leave(Player player) {
+				player.getPacketSender().sendInterfaceRemoval();
+				player.setWildernessLevel(0);
+			}
+
+			@Override
+			public void login(Player player) {
+				enter(player);
+			}
+
+			@Override
+			public void enter(Player player) {
+				//BountyHunter.onEnter(player);
+				player.getPacketSender().sendWalkableInterface(25400);
+				player.getPacketSender().sendInteractionOption("Attack", 2, true);
+				player.getPacketSender().sendInteractionOption("null", 1, false); //Remove challenge option
+			}
+
+			@Override
+			public boolean canTeleport(Player player) {
+				return true;
+			}
+
+			@Override
+			public boolean canAttack(Player attacker, Player target) {
+				int combatDifference = CombatFactory.combatLevelDifference(attacker.getSkillManager().getCombatLevel(), target.getSkillManager().getCombatLevel());
+				if (combatDifference > attacker.getWildernessLevel() || combatDifference > target.getWildernessLevel()) {
+					attacker.getPacketSender().sendMessage("Your combat level difference is too great to attack that player here.").sendMessage("Move deeper into the wilderness first.");
+					attacker.getMovementQueue().reset();
+					return false;
+				}
+				if(target.getLocation() != Location.EDGE_PVP) {
+					attacker.getPacketSender().sendMessage("That player cannot be attacked, because they are not outside of the bank..");
+					attacker.getMovementQueue().reset();
+					return false;
+				}
+				return true;
+			}
+		},
+		DUEL_ARENA(new int[]{3322, 3394, 3311, 3323, 3331, 3391}, new int[]{3195, 3291, 3223, 3248, 3242, 3260}, new int[]{0}, false, true, true, true, true, true) {
 			@Override
 			public void process(Player p) {
 				p.getDueling().process();
@@ -108,16 +158,18 @@ public class Locations {
 				return true;
 			}
 		},
-		DEFAULT(null, null, false, true, true, true, true, true) {
+		DEFAULT(null, null, null, false, true, true, true, true, true) {
 			@Override
 			public void process(Player p) {
 				// removes the attack option when leaving a combat area
 				p.getPacketSender().sendInteractionOption("null", 2, true);
 			}
         };
-		private Location(int[] x, int[] y, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
+
+		private Location(int[] x, int[] y, int[] z, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
 			this.x = x;
 			this.y = y;
+			this.z = z;
 			this.multi = multi;
 			this.summonAllowed = summonAllowed;
 			this.followingAllowed = followingAllowed;
@@ -126,7 +178,7 @@ public class Locations {
 			this.aidingAllowed = aidingAllowed;
 		}
 
-		private int[] x, y;
+		private int[] x, y, z;
 		private boolean multi;
 		private boolean summonAllowed;
 		private boolean followingAllowed;
@@ -138,6 +190,9 @@ public class Locations {
 			return x;
 		}
 
+		private int[] getZ() {
+		return z;
+	}
 		public int[] getY() {
 			return y;
 		}
@@ -217,15 +272,17 @@ public class Locations {
         }
 
         public static boolean inLocation(Entity entity, Location location) {
-        	return location == Location.DEFAULT ? getLocation(entity) == Location.DEFAULT ? true : false : inLocation(entity.getPosition().getX(), entity.getPosition().getY(), location); 
+        	return location == Location.DEFAULT ? getLocation(entity) == Location.DEFAULT ? true : false : inLocation(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), location); 
         }
 
-        public static boolean inLocation(int x, int y, Location location) {
+        public static boolean inLocation(int x, int y, int z, Location location) {
             int checks = location.getX().length - 1;
             for (int i = 0; i <= checks; i += 2) {
                 if (x >= location.getX()[i] && x <= location.getX()[i + 1]) {
                     if (y >= location.getY()[i] && y <= location.getY()[i + 1]) {
+                    	if (z >= location.getZ()[i] && z <= location.getZ()[i + 0]) {
                         return true;
+                    	}
                     }
                 }
             }

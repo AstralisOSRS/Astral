@@ -24,7 +24,7 @@ public class Runepouch extends ItemContainer {
     }
     
     public void addBarrageRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getPouch().isEmpty()) {
+    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
     		getPlayer().getPacketSender().sendInterfaceRemoval();
 			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.ANCIENT);
 			getPlayer().getPouch().add(565, 100000).add(555, 100000).add(560, 100000);
@@ -38,7 +38,7 @@ public class Runepouch extends ItemContainer {
     }
     
     public void addTeleBlockRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getPouch().isEmpty()) {
+    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
     		getPlayer().getPacketSender().sendInterfaceRemoval();
 			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.NORMAL);
 			getPlayer().getPouch().add(563, 100000).add(562, 100000).add(560, 100000);
@@ -52,7 +52,7 @@ public class Runepouch extends ItemContainer {
     }
     
     public void addVengeanceRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getPouch().isEmpty()) {
+    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
     		getPlayer().getPacketSender().sendInterfaceRemoval();
 			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.LUNAR);
 			getPlayer().getPouch().add(9075, 100000).add(557, 100000).add(560, 100000);

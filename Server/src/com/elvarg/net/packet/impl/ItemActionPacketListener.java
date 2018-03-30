@@ -65,7 +65,7 @@ public class ItemActionPacketListener implements PacketListener {
 			Gambling.plantFlower(player);
 			break;
 		case 9520:
-			if(player.getLocation() != Location.WILDERNESS && !player.getDueling().inDuel()) {
+			if(player.getLocation() != Location.WILDERNESS || player.getLocation() != Location.EDGE_PVP&& !player.getDueling().inDuel()) {
 				if(player.getSpecialPercentage() < 100) {
 					player.getPacketSender().sendInterfaceRemoval();
 					player.performAnimation(new Animation(829));

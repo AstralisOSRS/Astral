@@ -538,7 +538,7 @@ public class CombatFactory {
 			return;
 		}
 		
-		if (!(target.getLocation() == Location.WILDERNESS)) {
+		if (!(target.getLocation() == Location.WILDERNESS || target.getLocation() == Location.EDGE_PVP)) {
 			return;
 		}
 
@@ -569,7 +569,7 @@ public class CombatFactory {
 			return;
 		}
 		
-		if (!(target.getLocation() == Location.WILDERNESS)) {
+		if (!(target.getLocation() == Location.WILDERNESS || target.getLocation() == Location.EDGE_PVP)) {
 			return;
 		}
 
@@ -900,7 +900,7 @@ public class CombatFactory {
 			return;
 		}
 
-		if(attacker.getLocation() != Location.WILDERNESS) {
+		if(attacker.getLocation() != Location.WILDERNESS || target.getLocation() != Location.EDGE_PVP) {
 			return;
 		}
 
