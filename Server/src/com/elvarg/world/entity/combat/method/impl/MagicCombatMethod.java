@@ -131,9 +131,7 @@ public class MagicCombatMethod implements CombatMethod {
 				//Send splash graphics for the spell because it wasn't accurate
 				target.performGraphic(SPLASH_GRAPHIC);
 			}
-
 			previousSpell.finishCast(attacker, target, accurate, damage);
-
 		}
 	}
 }
