@@ -167,10 +167,13 @@ public class PlayerSession {
 	 * Handles an incoming message.
 	 * @param msg	The message to handle.
 	 */
-	public void processPacket(Packet msg) {
-		PacketConstants.PACKETS[msg.getOpcode()].handleMessage(player, msg);
+	public void processPacket(Packet packet) {
+		try {
+			PacketConstants.PACKETS[packet.getOpcode()].handleMessage(player, packet);
+		} finally {
+			packet.getBuffer().release();
+		}
 	}
-
 	/**
 	 * Queues the {@code msg} for this session to be encoded and sent to the
 	 * client.

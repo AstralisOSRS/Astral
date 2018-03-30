@@ -30,7 +30,7 @@ public class ChannelFilter extends ChannelInboundHandlerAdapter {
 		String host = ByteBufUtils.getHost(ctx.channel());
 
 		// if this local then, do nothing and proceed to next handler in the pipeline.
-		if (host.equalsIgnoreCase("127.0.0.1")) {
+		if (host.equalsIgnoreCase("localhost")) {
 			return;
 		}
 
@@ -56,7 +56,7 @@ public class ChannelFilter extends ChannelInboundHandlerAdapter {
 		String host = ByteBufUtils.getHost(ctx.channel());
 
 		// if this is local, do nothing and proceed to next handler in the pipeline.
-		if (host.equalsIgnoreCase("127.0.0.1")) {
+		if (host.equalsIgnoreCase("localhost")) {
 			return;
 		}
 

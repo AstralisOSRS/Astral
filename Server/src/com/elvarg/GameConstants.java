@@ -24,6 +24,7 @@ public class GameConstants {
 	 */
 	public static final boolean JAGGRAB_ENABLED = false;
 
+	public static boolean SwapXp = false;
 	/**
 	 * The game engine cycle rate in milliseconds.
 	 */

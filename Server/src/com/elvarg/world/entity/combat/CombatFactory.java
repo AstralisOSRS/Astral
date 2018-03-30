@@ -687,9 +687,9 @@ public class CombatFactory {
 		if(hit.getCombatMethod().getCombatType() == CombatType.MAGIC) {
 			if(player.getCombat().getPreviousCast() != null) {
 				if(hit.isAccurate()) {
-					if (player.getLocation() == Location.WILDERNESS) {
+					if (GameConstants.SwapXp == true) {
 						player.getSkillManager().addExperience(Skill.MAGIC, (int)(hit.getTotalDamage()));
-					} else if (!(player.getLocation() == Location.WILDERNESS)) {
+					} else if (!(GameConstants.SwapXp == true)) {
 						player.getSkillManager().addExperience(Skill.MAGIC, (int)(hit.getTotalDamage() * GameConstants.EXP_MULTIPLIER) + player.getCombat().getPreviousCast().baseExperience());
 					}
 				} else {
@@ -705,9 +705,9 @@ public class CombatFactory {
 		}
 
 		//Add hp xp
-		if (!(player.getLocation() == Location.WILDERNESS)) {
+		if (!(GameConstants.SwapXp == true)) {
 			player.getSkillManager().addExperience(Skill.HITPOINTS, (int) ((hit.getTotalDamage() * .70) * GameConstants.EXP_MULTIPLIER));
-		}else if (player.getLocation() == Location.WILDERNESS) {
+		}else if (GameConstants.SwapXp == true) {
 		}
 		//Magic xp was already added
 		if(hit.getCombatMethod().getCombatType() == CombatType.MAGIC) {
@@ -718,9 +718,9 @@ public class CombatFactory {
 		final int[] exp = hit.getSkills();
 		for (int i : exp) {
 			Skill skill = Skill.values()[i];
-			if (player.getLocation() == Location.WILDERNESS) {
+			if (GameConstants.SwapXp == true) {
 				player.getSkillManager().addExperience(skill, (int) (((hit.getTotalDamage()) / exp.length)));
-			} else if (!(player.getLocation() == Location.WILDERNESS)) {
+			} else if (!(GameConstants.SwapXp == true)) {
 				player.getSkillManager().addExperience(skill, (int) (((hit.getTotalDamage()) / exp.length) * GameConstants.EXP_MULTIPLIER));
 			}
 		}

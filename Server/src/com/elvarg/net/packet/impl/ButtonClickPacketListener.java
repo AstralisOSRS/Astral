@@ -161,6 +161,16 @@ public class ButtonClickPacketListener implements PacketListener {
 			}
 			break;
 
+		case TOGGLE_Counterxp_change:
+			if (GameConstants.SwapXp == false) {
+			GameConstants.SwapXp = true;
+			player.getPacketSender().sendMessage("you swap your xpcounter to your damage");
+			} else {
+				GameConstants.SwapXp = false;
+				player.getPacketSender().sendMessage("you swap your xpcounter back to default");
+			}
+			break;
+			
 		case AUTOCAST_BUTTON_1:
 		case AUTOCAST_BUTTON_2:
 			player.getPacketSender().sendMessage("A spell can be autocast by simply right-clicking on it in your Magic spellbook and ").sendMessage("selecting the \"Autocast\" option.");
@@ -279,6 +289,7 @@ public class ButtonClickPacketListener implements PacketListener {
 	private static final int PRICE_CHECKER_WITHDRAW_ALL = 18255;
 	private static final int PRICE_CHECKER_DEPOSIT_ALL = 18252;
 	private static final int TOGGLE_EXP_LOCK = 476;
+	private static final int TOGGLE_Counterxp_change = 500;
 
 	//Magic spell buttons
 	private static final int HOME_TELEPORT_BUTTON = 39101;
