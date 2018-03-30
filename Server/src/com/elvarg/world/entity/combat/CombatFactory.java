@@ -46,6 +46,7 @@ import com.elvarg.world.model.Skill;
 import com.elvarg.world.model.SkullType;
 import com.elvarg.world.model.container.impl.Equipment;
 import com.elvarg.world.model.equipment.BonusManager;
+import com.elvarg.world.model.movement.MovementStatus;
 import com.elvarg.world.model.movement.path.RS317PathFinder;
 
 /**
@@ -299,6 +300,7 @@ public class CombatFactory {
 			attacker.getCombat().reset();
 			return false;
 		}
+		
 
 		//Check if any of the two have wrong session state.
 		if(target.isPlayer()) {
@@ -530,9 +532,13 @@ public class CombatFactory {
 		}
 
 		//If target is teleporting or needs placement
-		//Dont continue to add the hit.
+		//Don't continue to add the hit.
 		if(target.isUntargetable() || 
 				target.isNeedsPlacement()) {
+			return;
+		}
+		
+		if (!(target.getLocation() == Location.WILDERNESS)) {
 			return;
 		}
 
@@ -560,6 +566,10 @@ public class CombatFactory {
 		//Don't continue to add the hit.
 		if(target.isUntargetable() || 
 				target.isNeedsPlacement()) {
+			return;
+		}
+		
+		if (!(target.getLocation() == Location.WILDERNESS)) {
 			return;
 		}
 
@@ -1018,7 +1028,8 @@ public class CombatFactory {
 
 		if(character.isPlayer()) {
 
-			character.getMovementQueue().reset();
+			character.getMovementQueue().setMovementStatus(MovementStatus.NONE).reset();
+
 			//Send message and effect timer to client
 			character.getAsPlayer().getPacketSender().sendMessage("@red@You have been frozen!")
 			.sendEffectTimer(seconds, EffectTimer.FREEZE);
