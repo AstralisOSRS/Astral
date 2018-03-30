@@ -81,7 +81,7 @@ public class ObjectActionPacketListener implements PacketListener {
 					if (player.getPosition().getZ() == 0) {
 						player.getBank(player.getCurrentBankTab()).open();
 					} else {
-						player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
+						player.getPacketSender().sendMessage("Nothing interesting happens.");
 					}
 					break;
 					
@@ -107,25 +107,33 @@ public class ObjectActionPacketListener implements PacketListener {
 					break;
 
 				case DITCH_PORTAL:
+					if (player.getPosition().getZ() == 0) {
 					player.getPacketSender().sendMessage("You are teleported to the Wilderness ditch.");
 					player.moveTo(new Position(3087, 3520));
+					}else {
+						player.getPacketSender().sendMessage("Nothing interesting happens.");
+					}
 					break;
 
 				case WILDERNESS_DITCH:
+					if (player.getPosition().getZ() == 0) {
 					player.getMovementQueue().reset();
 					if(player.getForceMovement() == null && player.getClickDelay().elapsed(2000)) {
 						final Position crossDitch = new Position(0, player.getPosition().getY() < 3522 ? 3 : -3);
 						TaskManager.submit(new ForceMovementTask(player, 3, new ForceMovement(player.getPosition().copy(), crossDitch, 0, 70, crossDitch.getY() == 3 ? 0 : 2, 6132)));
 						player.getClickDelay().reset();
 					}
-					break;
+				}else {
+					player.getPacketSender().sendMessage("You can't jump over the ditch at Edgepvp.");
+				}
+				break;
 
 				case MAGICAL_ALTAR:
+					if (player.getPosition().getZ() == 0) {
 					DialogueManager.start(player, 8);
 					player.setDialogueOptions(new DialogueOptions() {
 						@Override
 						public void handleOption(Player player, int option) {
-							if (player.getPosition().getZ() == 0) {
 							switch(option) {
 							case 1: //Normal spellbook option
 								player.getPacketSender().sendInterfaceRemoval();
@@ -142,13 +150,12 @@ public class ObjectActionPacketListener implements PacketListener {
 							case 4: //Cancel option
 								player.getPacketSender().sendInterfaceRemoval();
 								break;
-								
-							}
-							} else {
-								player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
 							}
 						}
 					});
+				} else {
+					player.getPacketSender().sendMessage("Nothing interesting happens.");
+				}
 				break;
 
 				case REJUVENATION_POOL:
@@ -157,7 +164,7 @@ public class ObjectActionPacketListener implements PacketListener {
 					player.performGraphic(new Graphic(683));
 					player.restart(false);
 					} else {
-						player.getPacketSender().sendMessage("You can't use this at Edgepvp.");
+						player.getPacketSender().sendMessage("Nothing interesting happens.");
 					}
 					break;
 
@@ -204,8 +211,12 @@ public class ObjectActionPacketListener implements PacketListener {
 					player.getBank(player.getCurrentBankTab()).open();
 					break;
 				case MAGICAL_ALTAR:
+					if (player.getPosition().getZ() == 0) {
 					player.getPacketSender().sendInterfaceRemoval();
 					MagicSpellbook.changeSpellbook(player, MagicSpellbook.NORMAL);
+					}else {
+						player.getPacketSender().sendMessage("Nothing interesting happens.");
+					}
 					break;
 				}
 			}
@@ -246,8 +257,12 @@ public class ObjectActionPacketListener implements PacketListener {
 			public void execute() {
 				switch(id) {
 				case MAGICAL_ALTAR:
-					player.getPacketSender().sendInterfaceRemoval();
-					MagicSpellbook.changeSpellbook(player, MagicSpellbook.ANCIENT);
+					if (player.getPosition().getZ() == 0) {
+						player.getPacketSender().sendInterfaceRemoval();
+						MagicSpellbook.changeSpellbook(player, MagicSpellbook.ANCIENT);
+						}else {
+							player.getPacketSender().sendMessage("Nothing interesting happens.");
+						}
 					break;
 				}
 			}
@@ -288,8 +303,12 @@ public class ObjectActionPacketListener implements PacketListener {
 			public void execute() {
 				switch(id) {
 				case MAGICAL_ALTAR:
-					player.getPacketSender().sendInterfaceRemoval();
-					MagicSpellbook.changeSpellbook(player, MagicSpellbook.LUNAR);
+					if (player.getPosition().getZ() == 0) {
+						player.getPacketSender().sendInterfaceRemoval();
+						MagicSpellbook.changeSpellbook(player, MagicSpellbook.LUNAR);
+						}else {
+							player.getPacketSender().sendMessage("Nothing interesting happens.");
+						}
 					break;
 				}
 			}
