@@ -106,6 +106,9 @@ public abstract class Spell {
 				for(Item it : Arrays.asList(items)) {
 					if(it != null)
 						player.getInventory().delete(it);
+					if (player.getInventory().contains(12791) && !player.getInventory().contains(it)) {
+						player.getPouch().delete(it);
+					}
 				}
 			}
 		}
