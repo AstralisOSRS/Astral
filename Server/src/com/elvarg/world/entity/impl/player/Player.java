@@ -4,7 +4,6 @@ package com.elvarg.world.entity.impl.player;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
 import com.elvarg.GameConstants;
 import com.elvarg.definitions.ItemDefinition;
 import com.elvarg.definitions.WeaponInterfaces;
@@ -40,9 +39,9 @@ import com.elvarg.world.entity.combat.magic.Autocasting;
 import com.elvarg.world.entity.impl.Character;
 import com.elvarg.world.entity.impl.npc.NPC;
 import com.elvarg.world.entity.impl.npc.NpcAggression;
+import com.elvarg.world.entity.impl.object.ObjectHandler;
 import com.elvarg.world.model.Animation;
 import com.elvarg.world.model.Appearance;
-import com.elvarg.world.model.BossPet;
 import com.elvarg.world.model.ChatMessage;
 import com.elvarg.world.model.EffectTimer;
 import com.elvarg.world.model.Flag;
@@ -192,6 +191,7 @@ public class Player extends Character {
 		if(walkToTask != null) {
 			walkToTask.onTick();
 		}
+		
 		
 		//Process aggression
 		NpcAggression.onTick(this);
@@ -359,6 +359,7 @@ public class Player extends Character {
 		
 		//Packets
 		getPacketSender().sendMapRegion().sendDetails(); //Map region, player index and player rights
+		ObjectHandler.onRegionChange(getAsPlayer());
 		getPacketSender().sendTabs(); //Client sideicons
 		getPacketSender().sendMessage("Welcome to Astral.");
 

@@ -24,6 +24,7 @@ import com.elvarg.world.entity.combat.CombatSpecial;
 import com.elvarg.world.entity.combat.bountyhunter.BountyHunter;
 import com.elvarg.world.entity.impl.npc.NPC;
 import com.elvarg.world.entity.impl.object.GameObject;
+import com.elvarg.world.entity.impl.object.ObjectHandler;
 import com.elvarg.world.entity.impl.player.Player;
 import com.elvarg.world.entity.impl.player.PlayerSaving;
 import com.elvarg.world.model.Animation;
@@ -203,11 +204,13 @@ public class CommandPacketListener implements PacketListener {
 			Player plr = World.getPlayerByName(command.substring(parts[0].length() + 1));
 			if(plr != null) {
 				player.moveTo(plr.getPosition().copy());
+				ObjectHandler.onRegionChange(player.getAsPlayer());
 			}
 		} else if(parts[0].equals("teletome")) {
 			Player plr = World.getPlayerByName(command.substring(parts[0].length() + 1));
 			if(plr != null) {
 				plr.moveTo(player.getPosition().copy());
+				ObjectHandler.onRegionChange(plr.getAsPlayer());
 			}
 		} else if(parts[0].equals("mute")) {
 			String player2 = command.substring(parts[0].length() + 1);
@@ -535,6 +538,7 @@ public class CommandPacketListener implements PacketListener {
 				z = Integer.parseInt(parts[3]);
 			}
 			player.moveTo(new Position(x, y, z));
+			ObjectHandler.onRegionChange(player.getAsPlayer());
 		}
 		if(parts[0].startsWith("anim")) {
 			int anim = Integer.parseInt(parts[1]);

@@ -81,10 +81,10 @@ public class Locations {
 				return true;
 			}
 		},
-		EDGE_PVP(new int[]{3070, 3106, 3077, 3099},
-        new int[]{3446, 3487, 3486, 3446}, new int[]{20},false, true,
-				true, true, true, true) {
-			@Override
+		EDGE_PVP(new int[]{3070, 3106, 3077, 3099, 3099, 3144, 3140, 3099, 3090, 3068, 3067, 3090, 3098, 3067, 3067, 3098},
+		         new int[]{3446, 3487, 3486, 3446, 3488, 3520, 3488, 3520, 3488, 3499, 3488, 3499, 3500, 3520, 3500, 3520}, new int[]{20},false, true,
+						true, true, true, true) {
+					@Override
 			public void process(Player player) {
 				int combatleast = player.getSkillManager().getCombatLevel()-player.getWildernessLevel();
 				player.setWildernessLevel(12);
@@ -280,7 +280,7 @@ public class Locations {
             for (int i = 0; i <= checks; i += 2) {
                 if (x >= location.getX()[i] && x <= location.getX()[i + 1]) {
                     if (y >= location.getY()[i] && y <= location.getY()[i + 1]) {
-                    	if (z >= location.getZ()[i] && z <= location.getZ()[i + 0]) {
+                    	if (z >= location.getZ()[0] && z <= location.getZ()[0]) {
                         return true;
                     	}
                     }

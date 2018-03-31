@@ -16,10 +16,12 @@ import com.elvarg.world.entity.combat.CombatSpecial;
 import com.elvarg.world.entity.combat.CombatType;
 import com.elvarg.world.entity.combat.formula.DamageFormulas;
 import com.elvarg.world.entity.impl.player.Player;
+import com.elvarg.world.model.Animation;
 import com.elvarg.world.model.ForceMovement;
 import com.elvarg.world.model.Graphic;
 import com.elvarg.world.model.MagicSpellbook;
 import com.elvarg.world.model.Position;
+import com.elvarg.world.model.Priority;
 import com.elvarg.world.model.Skill;
 import com.elvarg.world.model.Locations.Location;
 import com.elvarg.world.model.dialogue.DialogueManager;
@@ -77,6 +79,15 @@ public class ObjectActionPacketListener implements PacketListener {
 
 				switch(id) {
 
+				case 1088:
+					if (player.getPosition().getZ() > 0) {
+							player.getPacketSender().sendMessage("You feel slightly renewed after that cup of tea break.");
+							player.performGraphic(new Graphic(683));
+							player.restart(false);
+							} else {
+								player.getPacketSender().sendMessage("Nothing interesting happens.");
+							}	
+					break;
 				case BANK_CHEST:
 					if (player.getPosition().getZ() == 0) {
 						player.getBank(player.getCurrentBankTab()).open();

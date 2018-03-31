@@ -80,6 +80,11 @@
 		"walk-radius": 2
 	},
 	{
+		"npcId": 3343,
+        "name": "Nurse Tafani",
+		"examine": "she can heal players.. quite good actually.. Heh!"
+	},
+	{
 		"npcId": 1158,
         "name": "Maxed bot",
 		"attackable": true,

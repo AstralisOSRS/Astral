@@ -44,7 +44,7 @@ public class ObjectHandler {
 		for(Player p : World.getPlayers()) {
 
 			//Check that the player is in proper range
-			if(p == null || !p.getPosition().isWithinDistance(object.getPosition(), DISTANCE_SPAWN)) {
+			if(p == null) { //|| !p.getPosition().isWithinDistance(object.getPosition(), DISTANCE_SPAWN)) {
 				continue;
 			}
 
@@ -69,7 +69,7 @@ public class ObjectHandler {
 		for(Player p : World.getPlayers()) {
 
 			//Check that the player is in proper range
-			if(p == null || !p.getPosition().isWithinDistance(object.getPosition(), DISTANCE_SPAWN)) {
+			if(p == null) { //|| !p.getPosition().isWithinDistance(object.getPosition(), DISTANCE_SPAWN)) {
 				continue;
 			}
 
@@ -118,12 +118,12 @@ public class ObjectHandler {
 			if(obj == null) {
 				continue;
 			}
-			if(player.getPosition().isWithinDistance(obj.getPosition(), DISTANCE_SPAWN)) {
+			//if(player.getPosition().isWithinDistance(obj.getPosition(), DISTANCE_SPAWN)) {
 				if(obj.getId() == -1) {
 					despawnPersonalObject(player, obj);
 				} else {
 					spawnPersonalObject(player, obj);
-				}
+				//}
 			}
 		}
 	}
@@ -152,5 +152,5 @@ public class ObjectHandler {
 	/***
 	 * Spawn or despawn objects for entities within 70 squares of distance
 	 */
-	private static final int DISTANCE_SPAWN = 70;
+	//private static final int DISTANCE_SPAWN = 70;
 }
