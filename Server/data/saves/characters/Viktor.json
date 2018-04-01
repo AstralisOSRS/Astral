@@ -1,11 +1,11 @@
 {
-  "username": "Embolden",
-  "password": "skrrtskrrt123",
-  "staff-rights": "DEVELOPER",
+  "username": "Viktor",
+  "password": "hi1",
+  "staff-rights": "PLAYER",
   "position": {
-    "x": 3092,
-    "y": 3491,
-    "z": 0
+    "x": 3087,
+    "y": 3511,
+    "z": 20
   },
   "spell-book": "ANCIENT",
   "fight-type": "STAFF_POUND",
@@ -17,20 +17,20 @@
   "rigour": true,
   "augury": true,
   "has-veng": false,
-  "last-veng": -33846,
+  "last-veng": -71543,
   "running": true,
   "openPresetsOnDeath": true,
   "run-energy": 100,
-  "spec-percentage": 100,
+  "spec-percentage": 30,
   "recoil-damage": 0,
   "poison-damage": 0,
-  "poison-immunity": -113,
-  "fire-immunity": -113,
-  "teleblock-timer": -113,
-  "prayerblock-timer": -113,
-  "target-search-timer": -2858,
-  "special-attack-restore-timer": -739,
-  "skull-timer": -9184,
+  "poison-immunity": 88,
+  "fire-immunity": 0,
+  "teleblock-timer": 0,
+  "prayerblock-timer": 0,
+  "target-search-timer": -42459,
+  "special-attack-restore-timer": -519,
+  "skull-timer": -529,
   "skull-type": "WHITE_SKULL",
   "total-kills": 1,
   "target-kills": 4,
@@ -46,128 +46,128 @@
   "blowpipe-scales": 0,
   "inventory": [
     {
-      "id": 10551,
+      "id": 6570,
       "amount": 1,
       "slot": 0
     },
     {
-      "id": 12006,
+      "id": 4736,
       "amount": 1,
       "slot": 1
     },
     {
-      "id": 6570,
+      "id": 12006,
       "amount": 1,
       "slot": 2
     },
     {
-      "id": 11936,
-      "amount": 1,
+      "id": -1,
+      "amount": 0,
       "slot": 3
-    },
-    {
-      "id": 4751,
-      "amount": 1,
-      "slot": 4
-    },
-    {
-      "id": 12954,
-      "amount": 1,
-      "slot": 5
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 6
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 7
-    },
-    {
-      "id": 4736,
-      "amount": 1,
-      "slot": 8
     },
     {
       "id": 11802,
       "amount": 1,
-      "slot": 9
+      "slot": 4
     },
     {
-      "id": 12695,
+      "id": 4751,
       "amount": 1,
-      "slot": 10
+      "slot": 5
     },
     {
-      "id": 11936,
+      "id": 12954,
       "amount": 1,
-      "slot": 11
-    },
-    {
-      "id": 8013,
-      "amount": 6,
-      "slot": 12
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 13
-    },
-    {
-      "id": 10927,
-      "amount": 1,
-      "slot": 14
-    },
-    {
-      "id": 10925,
-      "amount": 1,
-      "slot": 15
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 16
-    },
-    {
-      "id": 6687,
-      "amount": 1,
-      "slot": 17
-    },
-    {
-      "id": 6685,
-      "amount": 1,
-      "slot": 18
-    },
-    {
-      "id": 6685,
-      "amount": 1,
-      "slot": 19
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 20
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 21
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 22
-    },
-    {
-      "id": 11936,
-      "amount": 1,
-      "slot": 23
+      "slot": 6
     },
     {
       "id": -1,
       "amount": 0,
+      "slot": 7
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 8
+    },
+    {
+      "id": 10551,
+      "amount": 1,
+      "slot": 9
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 10
+    },
+    {
+      "id": 229,
+      "amount": 1,
+      "slot": 11
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 12
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 13
+    },
+    {
+      "id": 229,
+      "amount": 1,
+      "slot": 14
+    },
+    {
+      "id": 10931,
+      "amount": 1,
+      "slot": 15
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 16
+    },
+    {
+      "id": 229,
+      "amount": 1,
+      "slot": 17
+    },
+    {
+      "id": 229,
+      "amount": 1,
+      "slot": 18
+    },
+    {
+      "id": 6689,
+      "amount": 1,
+      "slot": 19
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 20
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 21
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 22
+    },
+    {
+      "id": -1,
+      "amount": 0,
+      "slot": 23
+    },
+    {
+      "id": 8013,
+      "amount": 1,
       "slot": 24
     },
     {
@@ -275,13 +275,13 @@
   ],
   "skills": {
     "level": [
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
-      99,
+      91,
+      112,
+      91,
+      87,
+      91,
+      33,
+      91,
       99,
       99,
       99,
@@ -325,13 +325,13 @@
       99
     ],
     "experience": [
-      13034654,
-      13034654,
-      13035107,
-      13035677,
+      13034715,
+      13034715,
+      13035088,
       13034431,
       13034431,
-      13035877,
+      13034431,
+      13037822,
       13034431,
       13034431,
       13034431,
@@ -849,7 +849,7 @@
     },
     {
       "id": 8013,
-      "amount": 999,
+      "amount": 1012,
       "slot": 7
     },
     {
@@ -894,7 +894,7 @@
     },
     {
       "id": 11936,
-      "amount": 1000042,
+      "amount": 1000013,
       "slot": 16
     },
     {
@@ -1004,7 +1004,7 @@
     },
     {
       "id": 229,
-      "amount": 14,
+      "amount": 26,
       "slot": 38
     },
     {
@@ -1049,7 +1049,7 @@
     },
     {
       "id": 12701,
-      "amount": 3,
+      "amount": 4,
       "slot": 47
     },
     {
@@ -1184,17 +1184,17 @@
     },
     {
       "id": 12695,
-      "amount": 1000103,
+      "amount": 1000100,
       "slot": 74
     },
     {
       "id": 10925,
-      "amount": 100000007,
+      "amount": 100000001,
       "slot": 75
     },
     {
       "id": 6685,
-      "amount": 10000008,
+      "amount": 10000002,
       "slot": 76
     },
     {
@@ -1204,7 +1204,7 @@
     },
     {
       "id": 10929,
-      "amount": 3,
+      "amount": 4,
       "slot": 78
     },
     {
@@ -1223,149 +1223,154 @@
       "slot": 81
     },
     {
-      "id": 560,
-      "amount": 1994,
-      "slot": 82
-    },
-    {
-      "id": 555,
-      "amount": 1000,
-      "slot": 83
-    },
-    {
-      "id": 565,
-      "amount": 1000,
-      "slot": 84
-    },
-    {
       "id": 4712,
       "amount": 1,
-      "slot": 85
+      "slot": 82
     },
     {
       "id": 9075,
       "amount": 988,
-      "slot": 86
+      "slot": 83
     },
     {
       "id": 557,
       "amount": 970,
-      "slot": 87
+      "slot": 84
     },
     {
       "id": 12746,
       "amount": 1,
-      "slot": 88
+      "slot": 85
     },
     {
       "id": 21295,
       "amount": 18,
-      "slot": 89
+      "slot": 86
     },
     {
       "id": 11802,
       "amount": 9998,
-      "slot": 90
+      "slot": 87
     },
     {
       "id": 19553,
       "amount": 26,
-      "slot": 91
+      "slot": 88
     },
     {
       "id": 12006,
       "amount": 25,
-      "slot": 92
+      "slot": 89
     },
     {
       "id": 19722,
       "amount": 26,
-      "slot": 93
+      "slot": 90
     },
     {
       "id": 11773,
       "amount": 25,
-      "slot": 94
+      "slot": 91
     },
     {
       "id": 12791,
       "amount": 6,
-      "slot": 95
+      "slot": 92
     },
     {
       "id": 13239,
       "amount": 9999999,
-      "slot": 96
+      "slot": 93
     },
     {
       "id": 4716,
       "amount": 5,
-      "slot": 97
+      "slot": 94
     },
     {
       "id": 4718,
       "amount": 5,
-      "slot": 98
+      "slot": 95
     },
     {
       "id": 4720,
       "amount": 5,
-      "slot": 99
+      "slot": 96
     },
     {
       "id": 4722,
       "amount": 5,
-      "slot": 100
+      "slot": 97
     },
     {
       "id": 6570,
       "amount": 19,
-      "slot": 101
+      "slot": 98
     },
     {
       "id": 4751,
       "amount": 4,
-      "slot": 102
+      "slot": 99
     },
     {
       "id": 10551,
       "amount": 19,
-      "slot": 103
+      "slot": 100
     },
     {
       "id": 6585,
       "amount": 19,
-      "slot": 104
+      "slot": 101
     },
     {
       "id": 13307,
       "amount": 230829758,
-      "slot": 105
+      "slot": 102
     },
     {
       "id": 5436,
       "amount": 1,
-      "slot": 106
+      "slot": 103
     },
     {
       "id": 6691,
       "amount": 3,
-      "slot": 107
+      "slot": 104
     },
     {
       "id": 10927,
       "amount": 2,
-      "slot": 108
+      "slot": 105
     },
     {
       "id": 6687,
       "amount": 1,
-      "slot": 109
+      "slot": 106
     },
     {
       "id": 6689,
       "amount": 1,
+      "slot": 107
+    },
+    {
+      "id": 565,
+      "amount": 1000,
+      "slot": 108
+    },
+    {
+      "id": 555,
+      "amount": 1000,
+      "slot": 109
+    },
+    {
+      "id": 560,
+      "amount": 1994,
       "slot": 110
+    },
+    {
+      "id": 10931,
+      "amount": 1,
+      "slot": 111
     }
   ],
   "bank-1": [],

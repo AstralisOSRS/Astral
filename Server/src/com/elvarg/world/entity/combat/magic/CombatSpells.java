@@ -2430,7 +2430,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Projectile> castProjectile(Character cast, Character castOn) {
-            return Optional.of(new Projectile(cast, castOn, 374, 0, 20, 43, 31, 0));
+            return Optional.of(new Projectile(cast, castOn, 374, 3, 20, 43, 31, 0));
         }
 
         @Override
@@ -2766,7 +2766,7 @@ public enum CombatSpells {
 
          @Override
          public Optional<Projectile> castProjectile(Character cast, Character castOn) {
-             return Optional.of(new Projectile(cast, castOn, 1252, 0, 20, 43, 31, 0));
+             return Optional.of(new Projectile(cast, castOn, 1252, 30, 20, 43, 31, 0));
          }
 
          @Override
@@ -2817,7 +2817,7 @@ public enum CombatSpells {
 
         @Override
         public Optional<Projectile> castProjectile(Character cast, Character castOn) {
-            return Optional.of(new Projectile(cast, castOn, 1040, 0, 20, 43, 31, 0));
+            return Optional.of(new Projectile(cast, castOn, 1040, 3, 20, 43, 31, 0));
         }
 
         @Override

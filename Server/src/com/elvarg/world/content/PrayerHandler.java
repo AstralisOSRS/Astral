@@ -280,9 +280,7 @@ public class PrayerHandler {
 			Player p = character.getAsPlayer();
 			p.getPacketSender().sendConfig(pd.configId, 1);
 			if (hasNoPrayerOn(p, prayerId) && !p.isDrainingPrayer()) {
-				if(p.getRights() != PlayerRights.DEVELOPER) {
 					startDrain(p);
-				}
 			}
 			if (pd.hint != -1) {
 				int hintId = getHeadHint(character);

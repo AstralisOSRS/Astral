@@ -14,6 +14,7 @@ import com.elvarg.world.entity.combat.magic.CombatSpells;
 import com.elvarg.world.entity.impl.npc.NPC;
 import com.elvarg.world.entity.impl.player.Player;
 import com.elvarg.world.model.BrokenItem;
+import com.elvarg.world.model.Graphic;
 import com.elvarg.world.model.PlayerRights;
 import com.elvarg.world.model.SkullType;
 import com.elvarg.world.model.container.impl.Shop;
@@ -49,6 +50,11 @@ public class NPCOptionPacketListener implements PacketListener {
 					Shop.open(player, Shop.GAMBLING_SHOP);
 					break;
 					
+				case Nurse:
+					player.getPacketSender().sendMessage("The nurse rubs you softly, and arouses you..");
+					player.performGraphic(new Graphic(683));
+					player.restart(false);
+					break;
 				case MAKE_OVER_MAGE:
 					player.getPacketSender().sendInterfaceRemoval().sendInterface(3559);
 					player.getAppearance().setCanChangeAppearance(true);
@@ -185,6 +191,12 @@ public class NPCOptionPacketListener implements PacketListener {
 
 				case EMBLEM_TRADER:
 					Shop.open(player, Shop.PVP_SHOP);
+					break;
+					
+				case Nurse:
+					player.getPacketSender().sendMessage("The nurse rubs you softly, and arouses you..");
+					player.performGraphic(new Graphic(683));
+					player.restart(false);
 					break;
 
 				}
@@ -376,4 +388,5 @@ public class NPCOptionPacketListener implements PacketListener {
 	private static final int PERDU = 7456;
 	private static final int PARTY_PETE = 5792;
 	private static final int SHOP_KEEPER = 506;
+	private static final int Nurse = 3343;
 }

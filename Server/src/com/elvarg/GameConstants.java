@@ -51,6 +51,12 @@ public class GameConstants {
 	public static final Position DEFAULT_POSITION = new Position(3093, 3509);
 	
 	/**
+	 *  The edgepvp bank position in game.
+	 */
+	public static final Position EDGEPVP_POSITION = new Position(3030, 2920);
+	
+	
+	/**
 	 * Blood money.
 	 * Current currency ingame.
 	 */

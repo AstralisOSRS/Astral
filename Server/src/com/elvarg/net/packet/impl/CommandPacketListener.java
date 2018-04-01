@@ -3,6 +3,7 @@ package com.elvarg.net.packet.impl;
 import java.util.stream.Stream;
 
 import com.elvarg.Elvarg;
+import com.elvarg.GameConstants;
 import com.elvarg.definitions.ItemDefinition;
 import com.elvarg.definitions.NpcDropDefinition;
 import com.elvarg.definitions.ShopDefinition;
@@ -129,6 +130,18 @@ public class CommandPacketListener implements PacketListener {
 			player.getPacketSender().sendMessage("Lock: "+player.experienceLocked());
 		} else if(parts[0].startsWith("empty")) {
 			player.getInventory().resetItems().refreshItems();
+		} else if(parts[0].startsWith("edgepvp")) {
+			Position targetLocation = GameConstants.EDGEPVP_POSITION;
+			if(TeleportHandler.checkReqs(player, targetLocation)) {
+				TeleportHandler.teleport(player, targetLocation, TeleportType.PURO_PURO);
+				player.getPacketSender().sendMessage("Welcome to Edge-PvP. To tele back home do ::Home");
+			}
+		} else if(parts[0].startsWith("home")) {
+			Position targetLocation = GameConstants.DEFAULT_POSITION.copy().add(Misc.getRandom(3), Misc.getRandom(4));
+			if(TeleportHandler.checkReqs(player, targetLocation)) {
+				TeleportHandler.teleport(player, targetLocation, TeleportType.PURO_PURO);
+				player.getPacketSender().sendMessage("Welcome to Home.");
+			}
 		} else if(parts[0].startsWith("veng")) {
 			if(player.busy()) {
 				player.getPacketSender().sendMessage("You cannot do that right now.");

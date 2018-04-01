@@ -65,7 +65,7 @@ public class ItemActionPacketListener implements PacketListener {
 			Gambling.plantFlower(player);
 			break;
 		case 9520:
-			if(player.getLocation() != Location.WILDERNESS || player.getLocation() != Location.EDGE_PVP&& !player.getDueling().inDuel()) {
+			if(player.getLocation() != Location.WILDERNESS || player.getLocation() != Location.EDGE_PVP && !player.getDueling().inDuel()) {
 				if(player.getSpecialPercentage() < 100) {
 					player.getPacketSender().sendInterfaceRemoval();
 					player.performAnimation(new Animation(829));
@@ -85,12 +85,12 @@ public class ItemActionPacketListener implements PacketListener {
 			break;
 			
 		case 8013:
-			Position targetLocation = GameConstants.DEFAULT_POSITION.copy().add(Misc.getRandom(1), Misc.getRandom(4));
-			if(TeleportHandler.checkReqs(player, targetLocation)) {
-				TeleportHandler.teleport(player, targetLocation, TeleportType.TELE_TAB);
-				player.getInventory().delete(8013, 1);
-			}
-			break;
+		Position targetLocation1 = GameConstants.DEFAULT_POSITION.copy().add(Misc.getRandom(1), Misc.getRandom(4));
+		if(TeleportHandler.checkReqs(player, targetLocation1)) {
+			TeleportHandler.teleport(player, targetLocation1, TeleportType.TELE_TAB);
+			player.getInventory().delete(8013, 1);
+		}
+		break;
 		case 2542:
 		case 2543:
 		case 2544:

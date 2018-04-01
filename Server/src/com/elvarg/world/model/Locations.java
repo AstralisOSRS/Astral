@@ -31,7 +31,7 @@ public class Locations {
 		WILDERNESS(new int[]{2940, 3392, 2986, 3012, 3650, 3653, 3012, 3059, 3008, 3070, 2250, 2295, 2760,
                 2805, 2830, 2885, 2505, 2550},
         new int[]{3525, 3968, 10338, 10366, 3457, 3472, 10303, 10351, 10235, 10300, 4675, 4729,
-                10120, 10180, 10105, 10150, 4760, 4795}, new int[]{0},false, true,
+                10120, 10180, 10105, 10150, 4760, 4795},false, true,
 				true, true, true, true) {
 			@Override
 			public void process(Player player) {
@@ -81,8 +81,8 @@ public class Locations {
 				return true;
 			}
 		},
-		EDGE_PVP(new int[]{3070, 3106, 3077, 3099, 3099, 3144, 3140, 3099, 3090, 3068, 3067, 3090, 3098, 3067, 3067, 3098},
-		         new int[]{3446, 3487, 3486, 3446, 3488, 3520, 3488, 3520, 3488, 3499, 3488, 3499, 3500, 3520, 3500, 3520}, new int[]{20},false, true,
+		EDGE_PVP(new int[]{3008, 3071, 3071, 3008, 3035, 3071, 3035, 3071, 3026, 3008, 3008, 3026, 3027, 3034, 3027, 3034},
+		         new int[]{2880, 2911, 2880, 2911, 2912, 2943, 2944, 2912, 2912, 2943, 2912, 2943, 2924, 2943, 2924, 2924},false, true,
 						true, true, true, true) {
 					@Override
 			public void process(Player player) {
@@ -131,7 +131,7 @@ public class Locations {
 				return true;
 			}
 		},
-		DUEL_ARENA(new int[]{3322, 3394, 3311, 3323, 3331, 3391}, new int[]{3195, 3291, 3223, 3248, 3242, 3260}, new int[]{0}, false, true, true, true, true, true) {
+		DUEL_ARENA(new int[]{3322, 3394, 3311, 3323, 3331, 3391}, new int[]{3195, 3291, 3223, 3248, 3242, 3260}, false, true, true, true, true, true) {
 			@Override
 			public void process(Player p) {
 				p.getDueling().process();
@@ -158,7 +158,7 @@ public class Locations {
 				return true;
 			}
 		},
-		DEFAULT(null, null, null, false, true, true, true, true, true) {
+		DEFAULT(null, null, false, true, true, true, true, true) {
 			@Override
 			public void process(Player p) {
 				// removes the attack option when leaving a combat area
@@ -166,10 +166,9 @@ public class Locations {
 			}
         };
 
-		private Location(int[] x, int[] y, int[] z, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
+		private Location(int[] x, int[] y, boolean multi, boolean summonAllowed, boolean followingAllowed, boolean cannonAllowed, boolean firemakingAllowed, boolean aidingAllowed) {
 			this.x = x;
 			this.y = y;
-			this.z = z;
 			this.multi = multi;
 			this.summonAllowed = summonAllowed;
 			this.followingAllowed = followingAllowed;
@@ -178,7 +177,7 @@ public class Locations {
 			this.aidingAllowed = aidingAllowed;
 		}
 
-		private int[] x, y, z;
+		private int[] x, y;
 		private boolean multi;
 		private boolean summonAllowed;
 		private boolean followingAllowed;
@@ -189,10 +188,6 @@ public class Locations {
 		public int[] getX() {
 			return x;
 		}
-
-		private int[] getZ() {
-		return z;
-	}
 		public int[] getY() {
 			return y;
 		}
@@ -272,20 +267,18 @@ public class Locations {
         }
 
         public static boolean inLocation(Entity entity, Location location) {
-        	return location == Location.DEFAULT ? getLocation(entity) == Location.DEFAULT ? true : false : inLocation(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ(), location); 
+        	return location == Location.DEFAULT ? getLocation(entity) == Location.DEFAULT ? true : false : inLocation(entity.getPosition().getX(), entity.getPosition().getY(), location); 
         }
 
-        public static boolean inLocation(int x, int y, int z, Location location) {
+        public static boolean inLocation(int x, int y, Location location) {
             int checks = location.getX().length - 1;
             for (int i = 0; i <= checks; i += 2) {
                 if (x >= location.getX()[i] && x <= location.getX()[i + 1]) {
                     if (y >= location.getY()[i] && y <= location.getY()[i + 1]) {
-                    	if (z >= location.getZ()[0] && z <= location.getZ()[0]) {
                         return true;
                     	}
                     }
                 }
-            }
             return false;
         }
 

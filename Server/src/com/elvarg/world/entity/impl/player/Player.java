@@ -479,8 +479,7 @@ public class Player extends Character {
 					setSpecialPercentage(100);
 					getSpecialAttackRestore().start(120);
 				} else {
-					getPacketSender().sendMessage("@red@You must wait another "+getSpecialAttackRestore().secondsRemaining()+" seconds to restore special attack energy.").
-					sendMessage("@red@Don't feel like waiting? Pick up Bluryberry's special from the Emblem trader's shop!");
+					getPacketSender().sendMessage("@red@You must wait another "+getSpecialAttackRestore().secondsRemaining()+" seconds to restore special attack energy.");
 				}
 			}
 		}

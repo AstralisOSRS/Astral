@@ -12,17 +12,13 @@ import com.elvarg.net.packet.PacketListener;
 import com.elvarg.world.collision.region.RegionClipping;
 import com.elvarg.world.content.Obelisks;
 import com.elvarg.world.entity.combat.CombatFactory;
-import com.elvarg.world.entity.combat.CombatSpecial;
 import com.elvarg.world.entity.combat.CombatType;
 import com.elvarg.world.entity.combat.formula.DamageFormulas;
 import com.elvarg.world.entity.impl.player.Player;
-import com.elvarg.world.model.Animation;
 import com.elvarg.world.model.ForceMovement;
 import com.elvarg.world.model.Graphic;
 import com.elvarg.world.model.MagicSpellbook;
 import com.elvarg.world.model.Position;
-import com.elvarg.world.model.Priority;
-import com.elvarg.world.model.Skill;
 import com.elvarg.world.model.Locations.Location;
 import com.elvarg.world.model.dialogue.DialogueManager;
 import com.elvarg.world.model.dialogue.DialogueOptions;
@@ -80,21 +76,14 @@ public class ObjectActionPacketListener implements PacketListener {
 				switch(id) {
 
 				case 1088:
-					if (player.getPosition().getZ() > 0) {
-							player.getPacketSender().sendMessage("You feel slightly renewed after that cup of tea break.");
-							player.performGraphic(new Graphic(683));
-							player.restart(false);
-							} else {
-								player.getPacketSender().sendMessage("Nothing interesting happens.");
-							}	
-					break;
+				player.getPacketSender().sendMessage("You feel slightly renewed after that cup of tea break.");
+				player.performGraphic(new Graphic(683));
+				player.restart(false);
+				break;
+				
 				case BANK_CHEST:
-					if (player.getPosition().getZ() == 0) {
-						player.getBank(player.getCurrentBankTab()).open();
-					} else {
-						player.getPacketSender().sendMessage("Nothing interesting happens.");
-					}
-					break;
+				player.getBank(player.getCurrentBankTab()).open();
+				break;
 					
 				  case MAXHIT_DUMMY:
 	                    CombatFactory.getMethod(player).startAnimation(player);
@@ -117,30 +106,16 @@ public class ObjectActionPacketListener implements PacketListener {
 					player.moveTo(new Position(3199, 3728));
 					break;
 
-				case DITCH_PORTAL:
-					if (player.getPosition().getZ() == 0) {
-					player.getPacketSender().sendMessage("You are teleported to the Wilderness ditch.");
-					player.moveTo(new Position(3087, 3520));
-					}else {
-						player.getPacketSender().sendMessage("Nothing interesting happens.");
-					}
-					break;
-
 				case WILDERNESS_DITCH:
-					if (player.getPosition().getZ() == 0) {
-					player.getMovementQueue().reset();
-					if(player.getForceMovement() == null && player.getClickDelay().elapsed(2000)) {
-						final Position crossDitch = new Position(0, player.getPosition().getY() < 3522 ? 3 : -3);
-						TaskManager.submit(new ForceMovementTask(player, 3, new ForceMovement(player.getPosition().copy(), crossDitch, 0, 70, crossDitch.getY() == 3 ? 0 : 2, 6132)));
-						player.getClickDelay().reset();
-					}
-				}else {
-					player.getPacketSender().sendMessage("You can't jump over the ditch at Edgepvp.");
+				player.getMovementQueue().reset();
+				if(player.getForceMovement() == null && player.getClickDelay().elapsed(2000)) {
+					final Position crossDitch = new Position(0, player.getPosition().getY() < 3522 ? 3 : -3);
+					TaskManager.submit(new ForceMovementTask(player, 3, new ForceMovement(player.getPosition().copy(), crossDitch, 0, 70, crossDitch.getY() == 3 ? 0 : 2, 6132)));
+					player.getClickDelay().reset();
 				}
 				break;
 
 				case MAGICAL_ALTAR:
-					if (player.getPosition().getZ() == 0) {
 					DialogueManager.start(player, 8);
 					player.setDialogueOptions(new DialogueOptions() {
 						@Override
@@ -164,19 +139,12 @@ public class ObjectActionPacketListener implements PacketListener {
 							}
 						}
 					});
-				} else {
-					player.getPacketSender().sendMessage("Nothing interesting happens.");
-				}
 				break;
 
 				case REJUVENATION_POOL:
-					if (player.getPosition().getZ() == 0) {
 					player.getPacketSender().sendMessage("You feel slightly renewed.");
 					player.performGraphic(new Graphic(683));
 					player.restart(false);
-					} else {
-						player.getPacketSender().sendMessage("Nothing interesting happens.");
-					}
 					break;
 
 				}
@@ -222,12 +190,8 @@ public class ObjectActionPacketListener implements PacketListener {
 					player.getBank(player.getCurrentBankTab()).open();
 					break;
 				case MAGICAL_ALTAR:
-					if (player.getPosition().getZ() == 0) {
 					player.getPacketSender().sendInterfaceRemoval();
 					MagicSpellbook.changeSpellbook(player, MagicSpellbook.NORMAL);
-					}else {
-						player.getPacketSender().sendMessage("Nothing interesting happens.");
-					}
 					break;
 				}
 			}
@@ -268,12 +232,8 @@ public class ObjectActionPacketListener implements PacketListener {
 			public void execute() {
 				switch(id) {
 				case MAGICAL_ALTAR:
-					if (player.getPosition().getZ() == 0) {
 						player.getPacketSender().sendInterfaceRemoval();
 						MagicSpellbook.changeSpellbook(player, MagicSpellbook.ANCIENT);
-						}else {
-							player.getPacketSender().sendMessage("Nothing interesting happens.");
-						}
 					break;
 				}
 			}
@@ -314,12 +274,8 @@ public class ObjectActionPacketListener implements PacketListener {
 			public void execute() {
 				switch(id) {
 				case MAGICAL_ALTAR:
-					if (player.getPosition().getZ() == 0) {
 						player.getPacketSender().sendInterfaceRemoval();
 						MagicSpellbook.changeSpellbook(player, MagicSpellbook.LUNAR);
-						}else {
-							player.getPacketSender().sendMessage("Nothing interesting happens.");
-						}
 					break;
 				}
 			}
@@ -369,7 +325,6 @@ public class ObjectActionPacketListener implements PacketListener {
 	private static final int MAGICAL_ALTAR = 29150;
 	private static final int WILDY_PORTAL = 4152;
 	private static final int REJUVENATION_POOL = 29241;
-	private static final int DITCH_PORTAL = 4151;
 	private static final int EDGEVILLE_BANK = 6943;
 	private static final int BANK_CHEST = 2693;
 	private static final int WILDERNESS_DITCH = 23271;

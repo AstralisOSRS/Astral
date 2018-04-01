@@ -167,7 +167,7 @@ public class EquipPacketListener implements PacketListener {
 						resetWeapon(player);
 					}
 
-					if(player.getEquipment().get(Equipment.WEAPON_SLOT).getId() != 4153) {
+					if(player.getEquipment().get(Equipment.WEAPON_SLOT).getId() != 4153 || player.getEquipment().get(Equipment.WEAPON_SLOT).getId() != 12848 || player.getEquipment().get(Equipment.WEAPON_SLOT).getId() != 13652) {
 						player.getCombat().reset();
 					}
 
