@@ -23,48 +23,6 @@ public class Runepouch extends ItemContainer {
         super(player);
     }
     
-    public void addBarrageRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
-    		getPlayer().getPacketSender().sendInterfaceRemoval();
-			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.ANCIENT);
-			getPlayer().getPouch().add(565, 100000).add(555, 100000).add(560, 100000);
-			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Barrage Runes.");
-		} else if (getPlayer().getPouch().contains(565) && getPlayer().getPouch().contains(555) && getPlayer().getPouch().contains(560)) {
-			getPlayer().getPacketSender().sendMessage("@red@ You already have Barrage runes inside your runepouch.");
-		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS) {
-			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
-			getPlayer().getPouch().resetItems();
-		}
-    }
-    
-    public void addTeleBlockRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
-    		getPlayer().getPacketSender().sendInterfaceRemoval();
-			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.NORMAL);
-			getPlayer().getPouch().add(563, 100000).add(562, 100000).add(560, 100000);
-			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Teleblock Runes.");
-		} else if (getPlayer().getPouch().contains(563) && getPlayer().getPouch().contains(562) && getPlayer().getPouch().contains(560)) {
-			getPlayer().getPacketSender().sendMessage("@red@ You already have Teleblock runes inside your runepouch.");
-		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS) {
-			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
-			getPlayer().getPouch().resetItems();
-		}
-    }
-    
-    public void addVengeanceRunes() {
-    	if (getPlayer().getLocation() != Location.WILDERNESS || getPlayer().getLocation() != Location.EDGE_PVP && getPlayer().getPouch().isEmpty()) {
-    		getPlayer().getPacketSender().sendInterfaceRemoval();
-			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.LUNAR);
-			getPlayer().getPouch().add(9075, 100000).add(557, 100000).add(560, 100000);
-			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Vengeance Runes.");
-		} else if (getPlayer().getPouch().contains(9075) && getPlayer().getPouch().contains(557) && getPlayer().getPouch().contains(560)) {
-			getPlayer().getPacketSender().sendMessage("@red@ You already have Vengeance runes inside your runepouch.");
-		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS) {
-			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
-			getPlayer().getPouch().resetItems();
-		}
-    }
-
     @Override
     public int capacity() {
         return 3;
@@ -101,6 +59,49 @@ public class Runepouch extends ItemContainer {
             add(addItem);
         }
     }
+    
+    public void addBarrageRunes() {
+    	if (getPlayer().getPouch().isEmpty() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+    		getPlayer().getPacketSender().sendInterfaceRemoval();
+			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.ANCIENT);
+			getPlayer().getPouch().add(565, 100000).add(555, 100000).add(560, 100000);
+			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Barrage Runes.");
+		} else if (getPlayer().getPouch().contains(565) && getPlayer().getPouch().contains(555) && getPlayer().getPouch().contains(560)) {
+			getPlayer().getPacketSender().sendMessage("@red@ You already have Barrage runes inside your runepouch.");
+		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
+			getPlayer().getPouch().resetItems();
+		}
+    }
+    
+    public void addTeleBlockRunes() {
+    	if (getPlayer().getPouch().isEmpty() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+    		getPlayer().getPacketSender().sendInterfaceRemoval();
+			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.NORMAL);
+			getPlayer().getPouch().add(563, 100000).add(562, 100000).add(560, 100000);
+			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Teleblock Runes.");
+		} else if (getPlayer().getPouch().contains(563) && getPlayer().getPouch().contains(562) && getPlayer().getPouch().contains(560)) {
+			getPlayer().getPacketSender().sendMessage("@red@ You already have Teleblock runes inside your runepouch.");
+		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
+			getPlayer().getPouch().resetItems();
+		}
+    }
+    
+    public void addVengeanceRunes() {
+    	if (getPlayer().getPouch().isEmpty() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+    		getPlayer().getPacketSender().sendInterfaceRemoval();
+			MagicSpellbook.changeSpellbook(getPlayer(), MagicSpellbook.LUNAR);
+			getPlayer().getPouch().add(9075, 100000).add(557, 100000).add(560, 100000);
+			getPlayer().getPacketSender().sendMessage("You Fill your pouch with Vengeance Runes.");
+		} else if (getPlayer().getPouch().contains(9075) && getPlayer().getPouch().contains(557) && getPlayer().getPouch().contains(560)) {
+			getPlayer().getPacketSender().sendMessage("@red@ You already have Vengeance runes inside your runepouch.");
+		} else if (getPlayer().getPouch().isFull() && getPlayer().getLocation() != Location.WILDERNESS && getPlayer().getLocation() != Location.EDGE_PVP) {
+			getPlayer().getPacketSender().sendMessage("You empty your runepouch.");
+			getPlayer().getPouch().resetItems();
+		}
+    }
+
 
     public static final int INTERFACE_ID = 33000;
 }

@@ -1027,8 +1027,11 @@ public class CombatFactory {
 		character.getCombat().getFreezeImmunityTimer().start(seconds + 3);
 
 		if(character.isPlayer()) {
-
-			character.getMovementQueue().setMovementStatus(MovementStatus.NONE).reset();
+			
+			
+			if (character.getMovementQueue().isMoving()) {
+				character.getMovementQueue().reset();
+			}
 
 			//Send message and effect timer to client
 			character.getAsPlayer().getPacketSender().sendMessage("@red@You have been frozen!")

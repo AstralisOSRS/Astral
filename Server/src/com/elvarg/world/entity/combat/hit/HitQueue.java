@@ -38,10 +38,7 @@ public class HitQueue {
 
 			//Make sure we only process the hit if it should be processed.
 			//For example - if attacker died or target is untargetable, don't process.
-			if(hit == null || hit.getTarget() == null
-					|| hit.getAttacker() == null
-					|| hit.getTarget().isUntargetable()
-					|| hit.getAttacker().getHitpoints() <= 0) {
+			if(hit == null || hit.getTarget() == null || hit.getAttacker() == null || hit.getTarget().isUntargetable() || hit.getAttacker().getHitpoints() <= 0) {
 				pendingHits.remove(hit);
 				continue;
 			}

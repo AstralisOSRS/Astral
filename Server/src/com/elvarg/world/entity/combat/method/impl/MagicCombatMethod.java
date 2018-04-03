@@ -2,9 +2,11 @@ package com.elvarg.world.entity.combat.method.impl;
 
 import com.elvarg.world.content.Dueling.DuelRule;
 import com.elvarg.world.content.Dueling.DuelState;
+import com.elvarg.world.entity.combat.CombatFactory;
 import com.elvarg.world.entity.combat.CombatType;
 import com.elvarg.world.entity.combat.hit.PendingHit;
 import com.elvarg.world.entity.combat.magic.CombatSpell;
+import com.elvarg.world.entity.combat.magic.CombatSpells;
 import com.elvarg.world.entity.combat.method.CombatMethod;
 import com.elvarg.world.entity.impl.Character;
 import com.elvarg.world.entity.impl.player.Player;
@@ -125,7 +127,6 @@ public class MagicCombatMethod implements CombatMethod {
 
 				//Send proper end graphics for the spell because it was accurate
 				previousSpell.endGraphic().ifPresent(target::performGraphic);
-
 			} else {
 
 				//Send splash graphics for the spell because it wasn't accurate

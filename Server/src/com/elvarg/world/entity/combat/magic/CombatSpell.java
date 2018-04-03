@@ -134,6 +134,5 @@ public abstract class CombatSpell extends Spell {
 	 * @param damage
 	 *            the amount of damage inflicted by this spell.
 	 */
-	public abstract void finishCast(Character cast, Character castOn,
-			boolean accurate, int damage);
+	public abstract void finishCast(Character cast, Character castOn, boolean accurate, int damage);
 }
