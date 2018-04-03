@@ -62,31 +62,31 @@ public class ChangeAppearancePacketListener implements PacketListener {
 	}
 
 	private static final int[][] ALLOWED_COLORS = { 
-		{ 0, 11 }, // hair color
-		{ 0, 15 }, // torso color
+		{ 0, 23 }, // hair color
+		{ 0, 14 }, // torso color
 		{ 0, 15 }, // legs color
-		{ 0, 5 }, // feet color
-		{ 0, 7 } // skin color
+		{ 0, 9 }, // feet color
+		{ 0, 17 } // skin color
 	};
 
 	private static final int[][] FEMALE_VALUES = {
-		{ 45, 54 }, // head
+		{ 45, 143 }, // head
 		{ -1, -1 }, // jaw
-		{ 56, 60 }, // torso
-		{ 61, 65 }, // arms
-		{ 67, 68 }, // hands
-		{ 70, 77 }, // legs
-		{ 79, 80 }, // feet
+		{ 56, 94 }, // torso
+		{ 61, 99 }, // arms
+		{ 67, 69 }, // hands
+		{ 70, 140 }, // legs
+		{ 79, 83 }, // feet
 	};
 
 	private static final int[][] MALE_VALUES = {
-		{ 0, 8 }, // head
-		{ 10, 17 }, // jaw
-		{ 18, 25 }, // torso
-		{ 26, 31 }, // arms
-		{ 33, 34 }, // hands
-		{ 36, 40 }, // legs
-		{ 42, 43 }, // feet
+		{ 0, 20 }, // head
+		{ 10, 20 }, // jaw
+		{ 18, 20 }, // torso
+		{ 26, 88 }, // arms
+		{ 33, 35 }, // hands
+		{ 36, 104 }, // legs
+		{ 42, 82 }, // feet
 	};
 	
 }

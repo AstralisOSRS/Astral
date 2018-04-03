@@ -14,6 +14,7 @@ import com.elvarg.world.content.clan.ClanChatManager;
 import com.elvarg.world.entity.combat.magic.Autocasting;
 import com.elvarg.world.entity.combat.magic.MagicClickSpells;
 import com.elvarg.world.entity.impl.player.Player;
+import com.elvarg.world.model.Flag;
 import com.elvarg.world.model.PlayerRights;
 import com.elvarg.world.model.Position;
 import com.elvarg.world.model.container.impl.Bank;
@@ -97,8 +98,10 @@ public class ButtonClickPacketListener implements PacketListener {
 		case OPEN_EQUIPMENT_SCREEN:
 			if(!player.busy()) {
 				BonusManager.open(player);
+
 			} else {
 				player.getPacketSender().sendMessage("You cannot do that right now.");
+				player.getUpdateFlag().flag(Flag.PLAYER_APPEARANCE);
 			}
 			break;
 
